@@ -1,0 +1,29 @@
+---
+import ThemeWrapper from "./ThemeWrapper.astro";
+import { Image } from "astro:assets";
+import KitchenImage from '../images/kitchen.jpg';
+---
+
+<section class="bg-white pb-20">
+  <ThemeWrapper>
+    <section class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+      <div class="bg-[#713FFA] p-5 md:p-10 rounded-2xl flex flex-col justify-between items-start">
+        <div>
+          <h5 class="text-base md:text-2xl font-body-bold text-white">Stop chasing your friends or brothers for not completing your housing project</h5>
+          <p class="text-sm md:text-base text-white mt-4">The idea for Motherland was born from my hearing the incessant stories of hardworking diaspora Nigerians who have had their life's earnings squandered by someone who they trusted to build their retirement home.</p>
+        </div>
+
+        <button class="bg-white text-black mt-10 md:mt-0 py-[15px] px-8 font-body-medium text-base rounded-lg">Join our waitlist</button>
+      </div>
+      <div class="w-full">
+        <Image
+          src={KitchenImage}
+          alt="motherland kitchen design mortgages"
+          decoding="async"
+          loading="lazy"
+          class="h-60 md:h-[380px] w-full rounded-2xl"
+        />
+      </div>
+    </section>
+  </ThemeWrapper>
+</section>

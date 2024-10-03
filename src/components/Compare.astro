@@ -1,0 +1,75 @@
+---
+import ReactCalc from "./ReactCalc";
+import ThemeWrapper from "./ThemeWrapper.astro";
+---
+
+<section class="bg-[#F7FAF7] w-full pt-10 md:py-16" id="loancalculator">
+  <ThemeWrapper>
+    <header class="max-w-xl mx-auto flex flex-col text-center justify-center">
+     <h1 class=" font-body-bold text-2xl md:text-4xl">Tired of getting bitten by traditional lenders? </h1>
+     <p class="font-body-medium text-sm md:text-base text-[#707070] mt-4">Motherland is duly licensed and supported by the appropriate bodies in both Canada and Nigeria</p>
+ </header>
+    <section class="relative max-w-[960px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-5 lg:gap-10 xl:gap-10 mt-10 md:mt-16">
+        <div class="bg-white p-4 md:p-10 rounded-lg">
+          <h1 class="text-center font-body-bold text-base">With tranditional lenders</h1>
+           <div class="flex flex-col gap-4 mt-5">
+            <div class="text-base font-body-medium flex items-center gap-2 md:gap-4">
+              <span class="bg-red-600 w-[16px] h-[16px] rounded-full flex justify-center items-center">
+                <img src="./images/check.svg" />
+              </span>
+              This is one of our differences
+            </div>
+            <div class="text-base font-body-medium flex items-center gap-2 md:gap-4">
+              <span class="bg-red-600 w-[16px] h-[16px] rounded-full flex justify-center items-center">
+                <img src="./images/check.svg" />
+              </span>
+              We provide neccessarily adequate data for you
+            </div>
+            <div class="text-base font-body-medium flex items-center gap-2 md:gap-4">
+              <span class="bg-red-600 w-[16px] h-[16px] rounded-full flex justify-center items-center">
+                <img src="./images/check.svg" />
+              </span>
+              This copy needs to be provided for here
+            </div>
+            <div class="text-base font-body-medium flex items-center gap-2 md:gap-4">
+              <span class="bg-red-600 w-[16px] h-[16px] rounded-full flex justify-center items-center">
+                <img src="./images/check.svg" />
+              </span>
+              Atleast 5 unique differences between traditional lenders
+            </div>
+          </div>
+        </div>
+        <div class="bg-white p-4 md:p-10 rounded-lg">
+          <h1 class="text-center font-body-bold text-base pt-5 md:pt-0">With Motherland</h1>
+          <div class="flex flex-col gap-4 mt-5">
+            <div class="text-base font-body-medium flex items-center gap-2 md:gap-4">
+              <span class="bg-main w-[16px] h-[16px] rounded-full flex justify-center items-center">
+                <img src="./images/check.svg" />
+              </span>
+              This is one of our differences
+            </div>
+            <div class="text-base font-body-medium flex items-center gap-2 md:gap-4">
+              <span class="bg-main w-[16px] h-[16px] rounded-full flex justify-center items-center">
+                <img src="./images/check.svg" />
+              </span>
+              We provide neccessarily adequate data for you
+            </div>
+            <div class="text-base font-body-medium flex items-center gap-2 md:gap-4">
+              <span class="bg-main w-[16px] h-[16px] rounded-full flex justify-center items-center">
+                <img src="./images/check.svg" />
+              </span>
+              This copy needs to be provided for here
+            </div>
+            <div class="text-base font-body-medium flex items-center gap-2 md:gap-4">
+              <span class="bg-main w-[16px] h-[16px] rounded-full flex justify-center items-center">
+                <img src="./images/check.svg" />
+              </span>
+              Atleast 5 unique differences between traditional lenders
+            </div>
+          </div>
+        </div>
+      
+        <span class="font-body-medium absolute  text-xl flex justify-center items-center text-center w-[70px] rounded-full h-[70px] border-[1px] border-[#f3f3f3] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-white text-[#3E3E3E]">VS</span>
+    </section>
+  </ThemeWrapper>
+</section>

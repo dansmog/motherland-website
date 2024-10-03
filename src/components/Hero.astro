@@ -1,0 +1,100 @@
+---
+import ThemeWrapper from "./ThemeWrapper.astro";
+import Header from './Header.astro'
+
+export const navList = [
+	{
+		id: 1,
+		title: "Why us?",
+		url: "#whyus"
+	},
+	{
+		id: 2,
+		title: "Our Model",
+		url: "#ourmodel"
+	},
+	{
+		id: 3,
+		title: "Loan calculator",
+		url: "#loancalculator"
+	},
+  	{
+		id: 3,
+		title: "Partnerships",
+		url: "#partnerships"
+	},
+	{
+		id: 4,
+		title: "FAQs",
+		url: "#faqs"
+	},
+]
+
+
+---
+
+<section class="hero pb-14 md:pb-32">
+
+  <ThemeWrapper>
+    <Header 
+      navList={navList}
+    />
+    <section class="max-w-[588px] pt-12 md:pt-16">
+      <h1 class="text-white font-body-bold text-4xl md:text-5xl md:leading-[3.6rem]">
+        Own a property back home with our 
+        <span class="text-[#FEAB2F] underline-svg">
+          hassle-free
+        </span> 
+        <span class="text-[#FEAB2F] underline-svg">Mortgage</span> Plan
+      </h1>
+      <p class="text-white text-base leading-6 font-body-medium mt-4">Simplify international property ownership in your homeland. Whether you're aiming to build, buy, or invest, we streamline the process across borders. Our services navigate local regulations, overcome language barriers, and manage time differences, making distant real estate transactions straightforward.</p>
+      <div class="flex flex-col gap-2 mt-8">
+        <div class="flex items-center gap-2">
+          <span class="bg-main w-[16px] h-[16px] rounded-full flex justify-center items-center"><svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.17361 6.23831L0.5 3.5647L1.25398 2.81076L3.17361 4.72506L7.23217 0.666504L7.98611 1.42581L3.17361 6.23831Z" fill="white"/>
+</svg>
+</span>
+          <span class="text-white text-sm font-body-medium">Up to $150k in mortgage plan</span>
+        </div>
+                <div class="flex items-center gap-2">
+          <span class="bg-main w-[16px] h-[16px] rounded-full flex justify-center items-center"><svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.17361 6.23831L0.5 3.5647L1.25398 2.81076L3.17361 4.72506L7.23217 0.666504L7.98611 1.42581L3.17361 6.23831Z" fill="white"/>
+</svg>
+</span>
+          <span class="text-white text-sm font-body-medium">Transparent interest rates</span>
+        </div>
+                <div class="flex items-center gap-2">
+          <span class="bg-main w-[16px] h-[16px] rounded-full flex justify-center items-center"><svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.17361 6.23831L0.5 3.5647L1.25398 2.81076L3.17361 4.72506L7.23217 0.666504L7.98611 1.42581L3.17361 6.23831Z" fill="white"/>
+</svg>
+</span>
+          <span class="text-white text-sm font-body-medium">Pay off at any time</span>
+        </div>
+      </div>
+      <div class="mt-12 flex gap-4">
+        <button class="bg-main text-white py-[15px] px-8 rounded-lg font-body-medium  hover:bg-green-600 transition-all duration-700 ease-in-out">Join our waitlist</button>
+        <button class="bg-white text-black py-[15px] px-8 rounded-lg font-body-medium">learn more</button>
+      </div>
+    </section>
+    
+  </ThemeWrapper>
+</section>
+
+<style>
+  .underline-svg {
+    position: relative;
+    display: inline-block;
+  }
+
+  .underline-svg::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 7px;
+    background-image: url("data:image/svg+xml,%3Csvg width='220' height='7' viewBox='0 0 220 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.15542 4.63625C5.1684 4.65288 8.08843 4.43931 10.994 4.31751C31.5471 3.45648 52.4761 3.00659 73.4416 2.72686C121.203 2.08952 169.263 2.88987 217.598 4.09677' stroke='%23FEAB2F' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+</style>

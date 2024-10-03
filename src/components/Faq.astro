@@ -1,0 +1,148 @@
+---
+import ThemeWrapper from "./ThemeWrapper.astro";
+---
+
+<script>
+  const faqData = [
+    {
+      question: "⁠How is WaitlistPro different from other waitlist builders?",
+      answer: `
+      <p class="font-gilroy-regular text-sm leading-relaxed text-black">
+       WaitlistPro specializes in creating engaging, high-converting waitlists with a comprehensive toolkit that includes rich media integration, payment processing, countdown timers, and social media features to help your pre-launch campaign stand out and drive conversions.
+      </p>
+      
+    `,
+    },
+    {
+      question: "⁠When will I get access to the product?",
+      answer: `<p class='font-body-regular text-sm text-black leading-relaxed'>WaitlistPro launches on September 9th, offering immediate access to core features while premium features roll out progressively—all included for lifetime buyers at no extra cost.</p>`,
+    },
+    {
+      question: "⁠⁠Is there a refund?",
+      answer:
+        "<p class='font-gilroy-regular text-sm text-black leading-relaxed'>Yes, if at any point you want a refund, you can request one, however this means you account would be downgraded to free version which has limited features.</p>",
+    },
+        {
+      question: "⁠⁠Hassle free mortgage?",
+      answer:
+        "<p class='font-gilroy-regular text-sm text-black leading-relaxed'>Yes, if at any point you want a refund, you can request one, however this means you account would be downgraded to free version which has limited features.</p>",
+    },
+        {
+      question: "⁠⁠What's the interest rate and how can i pay back?",
+      answer:
+        "<p class='font-gilroy-regular text-sm text-black leading-relaxed'>Yes, if at any point you want a refund, you can request one, however this means you account would be downgraded to free version which has limited features.</p>",
+    },
+        {
+      question: "⁠⁠Is there a refund?",
+      answer:
+        "<p class='font-gilroy-regular text-sm text-black leading-relaxed'>Yes, if at any point you want a refund, you can request one, however this means you account would be downgraded to free version which has limited features.</p>",
+    },
+
+
+  ];
+
+  function createFAQPanels() {
+    const faqContainer = document.getElementById("faqContainer");
+
+    faqData.forEach((item, index) => {
+      const panelDiv = document.createElement("div");
+      panelDiv.className = `border-[0.5px] bg-white rounded-lg border-white border-opacity-20 p-4 ${index > 0 ? "mt-3" : ""}`;
+
+      panelDiv.innerHTML = `
+      <span class="accordion flex items-center justify-between cursor-pointer text-black text-base light font-body-regular">
+        ${item.question}
+        <span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 12H18" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M12 18V6" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </span>
+      </span>
+      <div class="panel w-full mt-4" style="display: none;">
+        ${item.answer}
+      </div>
+    `;
+
+      faqContainer!.appendChild(panelDiv);
+    });
+
+    addAccordionListeners();
+  }
+
+  function addAccordionListeners() {
+  const accordions = document.getElementsByClassName("accordion");
+
+  for (let i = 0; i < accordions.length; i++) {
+    accordions[i].addEventListener("click", function(this: HTMLElement) {
+      // Close all panels
+      for (let j = 0; j < accordions.length; j++) {
+        if (accordions[j] !== this) {
+          accordions[j].classList.remove("active");
+          const panel = accordions[j].nextElementSibling as HTMLElement;
+          panel.style.display = "none";
+          const icon = accordions[j].querySelector("svg");
+          if (icon) {
+            icon.style.transform = "rotate(0deg)";
+          }
+        }
+      }
+
+      // Toggle the clicked panel
+      this.classList.toggle("active");
+      const panel = this.nextElementSibling as HTMLElement;
+      const icon = this.querySelector("svg");
+
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+        if (icon) {
+          icon.style.transform = "rotate(0deg)";
+        }
+      } else {
+        panel.style.display = "block";
+        if (icon) {
+          icon.style.transform = "rotate(45deg)";
+        }
+      }
+    });
+  }
+}
+
+  // Call the function to create the FAQ panels
+  createFAQPanels();
+</script>
+
+<section class="bg-[#F7FAF7] w-full relative py-10 mb:py-32 mt-14 mb:mt-20 mb-16" id="faqs">
+  <ThemeWrapper>
+    <div class="max-w-[654px] mx-auto">
+      <h1
+        class="text-2xl md:text-3xl xl:text-5xl font-body-medium text-center text-black md:leading-[48px] xl:leading-[4rem]"
+      >
+      Frequently Asked Questions
+      </h1>
+      <p
+        class="text-black font-body-medium text-sm md:text-base md:leading-relaxed text-center mt-3"
+      >
+    These are the most commonly asked question about motherland.
+can’t find what you are looking for? <a
+          href="https://x.com/paulwaweruco"
+          target="_blank"
+          class="underline">contact us here.</a
+        >
+      </p>
+    </div>
+    <section class="max-w-2xl mx-auto pt-16" id="faqContainer"></section>
+  </ThemeWrapper>
+</section>
+
+<style>
+  .panel {
+    display: none;
+    background-color: transparent;
+    overflow: hidden;
+  }
+  ul {
+    list-style-type: disc;
+    margin: 12px;
+    padding: 12px;
+  }
+</style>

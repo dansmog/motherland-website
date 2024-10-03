@@ -1,0 +1,104 @@
+---
+import { Image } from "astro:assets";
+import ThemeWrapper from "./ThemeWrapper.astro";
+
+import KitchenImage from '../images/kitchen.jpg';
+import Lagos from '../images/lagos.jpg'
+import Abuja from '../images/abuja.jpg'
+import Port from '../images/port.jpg'
+import Enugu from '../images/enugu.jpg'
+import Uyo from '../images/uyo.jpg'
+---
+
+<section class="bg-white w-full pt-10 md:pt-24 pb-0 md:pb-28" id="whyus">
+  <ThemeWrapper>
+    <span class="text-xs text-main font-body-medium">Why us?</span>
+      <h1 class="max-w-xl font-body-bold text-2xl md:text-5xl">We understand what it means to have a home.</h1>
+
+      <Image
+        src={KitchenImage}
+        alt="motherland kitchen design mortgages"
+        decoding="async"
+        loading="lazy"
+        class="h-60 md:h-[600px] w-full rounded-xl mt-6"
+      />
+      <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 px-0 md:px-6 lg:px-16 xl:px-16 mt-9">
+        <div>
+          <h1 class="font-body-bold text-2xl">We understand what it means to have a home.</h1>
+        </div>
+        <div class="flex flex-col mt-4 md:mt-4 gap-6">
+          <p class="text-base font-body-medium">The idea for Motherland was born from my hearing the incessant stories of hardworking diaspora Nigerians who have had their life's earnings squandered by someone who they trusted to build their retirement home. This is an unreliable retirement strategy for many diaspora Nigerians, who fall victim everyday.</p>
+
+          <p class="text-base font-body-medium">Motherland is supposed to step in and bridge the trust gap and provide reliability that has been lacking in the retirement planning for many diaspora Nigerians.</p>
+
+          <p class="text-base font-body-medium">Not only does Motherland provide trust, it also provides an easy, predictable, financing plan for acquiring the retirement estate of your choice in select cities in Nigeria.</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col justify-center pt-16 items-center w-full">
+        <div class="flex flex-row gap-4 md:gap-8">
+          <div class="w-[100px] h-[150px] md:w-[200px] md:h-[300px] lg:w-[300px] lg:h-[400px] xl:w-[300px] xl:h-[400px] relative rounded-full">
+            <div class="bg-black bg-opacity-40 absolute z-10 flex justify-center items-center w-full h-full top-0 rounded-full">
+              <h1 class="font-body-black text-base md:text-5xl text-white text-center">Lagos</h1>
+              
+            </div>
+            <Image 
+            src={Lagos}
+            alt="Lagos city"
+            class="w-full h-full object-cover rounded-full"
+            decoding="async"
+            />
+          </div>
+          <div class="w-[100px] h-[150px] md:w-[200px] md:h-[300px] lg:w-[300px] lg:h-[400px] xl:w-[300px] xl:h-[400px] relative rounded-full">
+            <div class="bg-black bg-opacity-40 absolute z-10 flex justify-center items-center w-full h-full top-0 rounded-full">
+              <h1 class="font-body-black text-base md:text-5xl text-white text-center">Abuja</h1>
+            </div>
+            <Image 
+            src={Abuja}
+            alt="Lagos city"
+            class="w-full h-full object-cover rounded-full"
+            decoding="async"
+            />
+          </div>
+          <div class="w-[100px] h-[150px] md:w-[200px] md:h-[300px] lg:w-[300px] lg:h-[400px] xl:w-[300px] xl:h-[400px] relative rounded-full">
+            <div class="bg-black bg-opacity-40 absolute flex justify-center items-center w-full h-full top-0 rounded-full">
+              <h1 class="font-body-black text-base md:text-5xl text-white text-center">Uyo</h1>
+            </div>
+                <Image 
+            src={Uyo}
+            alt="Uyo city"
+            class="w-full h-full object-cover rounded-full"
+            decoding="async"
+            />
+          </div>
+        </div>
+
+        <h1 class="font-body-bold text-2xl md:text-5xl text-center leading-normal text-black py-10 max-w-3xl"><span class="text-[#2DCA73]">Own</span> your first or next property in the heart of <span class="text-[#2DCA73]">Nigeria top states</span></h1>
+
+        <div class="flex flex-row gap-4 md:gap-8">
+          <div class="w-[100px] h-[150px] md:w-[200px] md:h-[300px] lg:w-[300px] lg:h-[400px] xl:w-[300px] xl:h-[400px] relative rounded-full">
+            <div class="bg-black bg-opacity-40 absolute z-10 flex justify-center items-center w-full h-full top-0 rounded-full">
+              <h1 class="font-body-black text-base md:text-5xl text-white text-center">Port <br /> harcout</h1>
+            </div>
+                <Image 
+            src={Port}
+            alt="Lagos city"
+            class="w-full h-full object-cover rounded-full"
+            decoding="async"
+            />
+          </div>
+          <div class="w-[100px] h-[150px] md:w-[200px] md:h-[300px] lg:w-[300px] lg:h-[400px] xl:w-[300px] xl:h-[400px] relative rounded-full">
+            <div class="bg-black bg-opacity-40 absolute z-10 flex justify-center items-center w-full h-full top-0 rounded-full">
+              <h1 class="font-body-black text-base md:text-5xl text-white text-center">Enugu</h1>
+            </div>
+                  <Image 
+            src={Enugu}
+            alt="Lagos city"
+            class="w-full h-full object-cover rounded-full"
+            decoding="async"
+            />
+          </div>
+        </div>
+      </div>
+  </ThemeWrapper>
+</section>
