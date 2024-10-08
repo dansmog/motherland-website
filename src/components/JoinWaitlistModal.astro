@@ -1,12 +1,14 @@
 ---
-import WaitlistReactForm from "./icons/WaitlistReactForm"
+import WaitlistReactForm from "./Icons/WaitlistReactForm";
 ---
 
 <div
   id="waitlistModal"
   class="fixed inset-0 bg-black bg-opacity-50 z-40 items-center justify-center hidden"
 >
-  <div class="bg-white relative p-5 rounded-lg  h-4/5 md:h-auto w-[380px]  md:w-[720px] overflow-scroll">
+  <div
+    class="bg-white relative p-5 rounded-lg h-4/5 md:h-auto w-[380px] md:w-[720px] overflow-scroll"
+  >
     <button
       id="closeModal"
       class="px-2 absolute top-2 right-2 py-2 bg-gray-200 rounded hover:bg-gray-300"
@@ -28,9 +30,9 @@ import WaitlistReactForm from "./icons/WaitlistReactForm"
     </button>
     <div class="relative">
       <h1 class="text-xl font-body-medium">Join the waitlist</h1>
-    
+
       <div class="mt-10">
-       <WaitlistReactForm client:only="react"/>
+        <WaitlistReactForm client:only="react" />
       </div>
     </div>
   </div>
