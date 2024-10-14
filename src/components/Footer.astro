@@ -1,45 +1,52 @@
 ---
+import { Image } from "astro:assets";
 import ThemeWrapper from "./ThemeWrapper.astro";
+import LogoGreen from "../images/fullgreen_logo.png";
 ---
 
 <section class="bg-white">
   <ThemeWrapper>
     <section class="grid grid-cols-1 md:grid-cols-2 mb-16">
       <div class="">
-        <svg width="146" height="24" viewBox="0 0 146 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M49.212 19H46.386V5.68H49.212L53.172 15.616L57.15 5.68H60.012V19H57.186V16.21C57.186 13.33 57.186 12.7 57.33 11.71L54.504 19H51.84L49.032 11.71C49.194 12.7 49.212 13.816 49.212 15.274V19ZM61.9584 14.482C61.9584 11.638 64.0464 9.73 66.9264 9.73C69.7884 9.73 71.8764 11.638 71.8764 14.482C71.8764 17.326 69.7884 19.216 66.9264 19.216C64.0464 19.216 61.9584 17.326 61.9584 14.482ZM64.7484 14.464C64.7484 15.832 65.6304 16.732 66.9264 16.732C68.2044 16.732 69.0864 15.832 69.0864 14.464C69.0864 13.114 68.2044 12.214 66.9264 12.214C65.6304 12.214 64.7484 13.114 64.7484 14.464ZM77.0316 19H74.2596V12.304H72.5496V10H74.2596V7.21H77.0316V10H78.7416V12.304H77.0316V19ZM82.7594 19H79.9874V5.428H82.7774V10.936C83.3354 10.162 84.3614 9.712 85.5314 9.712C87.6734 9.712 88.9154 11.08 88.9154 13.438V19H86.1434V14.104C86.1434 12.97 85.5134 12.232 84.5594 12.232C83.4614 12.232 82.7594 12.952 82.7594 14.068V19ZM95.0794 19.234C92.3614 19.234 90.4174 17.254 90.4174 14.482C90.4174 11.674 92.3074 9.712 95.0254 9.712C97.8514 9.712 99.6154 11.566 99.6154 14.5V15.202L93.0814 15.238C93.2434 16.426 93.9094 16.984 95.1334 16.984C96.1774 16.984 96.9154 16.606 97.1134 15.958H99.6514C99.3274 17.956 97.5454 19.234 95.0794 19.234ZM95.0434 11.962C93.9454 11.962 93.3334 12.448 93.1174 13.528H96.8614C96.8614 12.574 96.1594 11.962 95.0434 11.962ZM107.449 10V12.61H106.567C104.983 12.61 104.029 13.312 104.029 15.094V19H101.257V10.018H103.867L104.011 11.35C104.389 10.468 105.181 9.874 106.387 9.874C106.711 9.874 107.071 9.91 107.449 10ZM111.623 19H108.851V5.428H111.623V19ZM116.42 19.234C114.512 19.234 113.324 18.118 113.324 16.354C113.324 14.698 114.494 13.672 116.654 13.51L119.174 13.312V13.168C119.174 12.286 118.634 11.818 117.644 11.818C116.474 11.818 115.844 12.268 115.844 13.078H113.54C113.54 11.044 115.214 9.712 117.788 9.712C120.398 9.712 121.874 11.17 121.874 13.744V19H119.426L119.246 17.812C118.958 18.64 117.77 19.234 116.42 19.234ZM117.392 17.182C118.454 17.182 119.192 16.66 119.192 15.634V15.148L117.788 15.274C116.582 15.382 116.15 15.652 116.15 16.228C116.15 16.876 116.546 17.182 117.392 17.182ZM126.634 19H123.862V10H126.472L126.652 10.936C127.21 10.162 128.236 9.712 129.406 9.712C131.548 9.712 132.79 11.08 132.79 13.438V19H130.018V14.104C130.018 12.97 129.388 12.232 128.434 12.232C127.336 12.232 126.634 12.952 126.634 14.068V19ZM138.558 19.234C135.966 19.234 134.292 17.398 134.292 14.554C134.292 11.692 136.002 9.712 138.738 9.712C139.854 9.712 140.916 10.162 141.438 10.828V5.428H144.21V19H141.6L141.456 17.848C140.97 18.676 139.854 19.234 138.558 19.234ZM139.224 16.696C140.52 16.696 141.42 15.796 141.42 14.446C141.42 13.096 140.52 12.196 139.224 12.196C137.91 12.196 137.082 13.114 137.082 14.446C137.082 15.778 137.91 16.696 139.224 16.696Z" fill="black"/>
-<g clip-path="url(#clip0_247_961)">
-<path d="M37.3999 1H15.3999V23H37.3999V1Z" fill="#808080"/>
-<path d="M25.8498 1H10.9998C9.02539 1 7.4248 2.60058 7.4248 4.575V19.425C7.4248 21.3994 9.02539 23 10.9998 23H25.8498C27.8242 23 29.4248 21.3994 29.4248 19.425V4.575C29.4248 2.60058 27.8242 1 25.8498 1Z" fill="#333333"/>
-<path d="M22 12C22 5.92487 17.0751 1 11 1C4.92487 1 0 5.92487 0 12C0 18.0751 4.92487 23 11 23C17.0751 23 22 18.0751 22 12Z" fill="#080808"/>
-<g clip-path="url(#clip1_247_961)">
-<path d="M12.5 10.5C12.5 9.67157 11.8284 9 11 9C10.1716 9 9.5 9.67157 9.5 10.5C9.5 11.3284 10.1716 12 11 12C11.8284 12 12.5 11.3284 12.5 10.5Z" fill="white"/>
-<path d="M10.75 10.5H11.25L13 15H9L10.75 10.5Z" fill="white"/>
-</g>
-</g>
-<defs>
-<clipPath id="clip0_247_961">
-<rect width="37.4" height="22" fill="white" transform="translate(0 1)"/>
-</clipPath>
-<clipPath id="clip1_247_961">
-<rect width="4" height="6" fill="white" transform="translate(9 9)"/>
-</clipPath>
-</defs>
-</svg>
+        <Image
+          src={LogoGreen}
+          alt="motherland logo"
+          decoding="async"
+          loading="lazy"
+          class="h-8 w-auto"
+        />
 
-        <p class="max-w-96 text-base text-[#656363] mt-4 font-body-medium">Own a property back home with our hassle-free Mortgage Plan</p>
+        <p class="max-w-96 text-base text-[#656363] mt-4 font-body-medium">
+          Own a property back home with our hassle-free Mortgage Plan
+        </p>
       </div>
       <div class="grid grid-cols-1 gap-8 md:gap-0 md:grid-cols-2 mt-8 md:mt-0">
         <div class="flex flex-col gap-[10px]">
           <h6 class="text-lg font-body-bold">Resources</h6>
-          <a href="" class="text-base font-body-medium text-[#656363] hover:text-black  transition-all duration-700 ease-in-out">Why us - learn more</a>
-          <a href="" class="text-base font-body-medium text-[#656363] hover:text-black  transition-all duration-700 ease-in-out">How it works</a>
-          <a href="" class="text-base font-body-medium text-[#656363] hover:text-black  transition-all duration-700 ease-in-out">Frequently asked questions</a>
+          <a
+            href=""
+            class="text-base font-body-medium text-[#656363] hover:text-black transition-all duration-700 ease-in-out"
+            >Why us - learn more</a
+          >
+          <a
+            href=""
+            class="text-base font-body-medium text-[#656363] hover:text-black transition-all duration-700 ease-in-out"
+            >How it works</a
+          >
+          <a
+            href=""
+            class="text-base font-body-medium text-[#656363] hover:text-black transition-all duration-700 ease-in-out"
+            >Frequently asked questions</a
+          >
         </div>
 
         <div class="flex flex-col gap-[10px]">
           <h6 class="text-lg font-body-bold">Connect with us</h6>
-          <a href="mailto:team@motherland.com" class="text-base font-body-medium text-[#656363] hover:text-black  transition-all duration-700 ease-in-out">team@motherland.com</a>
+          <a
+            href="mailto:team@motherland.com"
+            class="text-base font-body-medium text-[#656363] hover:text-black transition-all duration-700 ease-in-out"
+            >team@motherland.com</a
+          >
           <div class="flex gap-5 items-center mt-4 md:mt-8">
             <a href="">
               <img src="./images/instagram.svg" />
@@ -57,6 +64,8 @@ import ThemeWrapper from "./ThemeWrapper.astro";
         </div>
       </div>
     </section>
-    <p class="text-sm text-[#656363] text-center font-body-medium">Copyright © motherland 2024. All rights reserved.</p>
+    <p class="text-sm text-[#656363] text-center font-body-medium">
+      Copyright © motherland 2024. All rights reserved.
+    </p>
   </ThemeWrapper>
 </section>
