@@ -5,33 +5,55 @@ import ThemeWrapper from "./ThemeWrapper.astro";
 
 <section class="bg-[#F7FAF7] w-full pt-10 md:py-16" id="loancalculator">
   <ThemeWrapper>
-    <section class="w-full grid grid-cols-1 md:grid-cols-2 md:gap-5 lg:gap-14 xl:gap-14">
+    <section
+      class="w-full grid grid-cols-1 md:grid-cols-2 md:gap-5 lg:gap-14 xl:gap-14"
+    >
       <div class="">
-          <h1 class="max-w-xl font-body-bold text-2xl md:text-5xl">Loan calculator.</h1>
-          <p class="max-w-2xl font-body-medium text-sm md:text-base text-[#707070] mt-4">The idea for Motherland was born from my hearing the incessant stories of hardworking diaspora Nigerians who have had their life's earnings squandered by someone who they trusted to build their retirement home.</p>
-          <div class="grid grid-cols-1 md:grid-cols-2 mt-6 md:mt-12 lg:mt-12 xl:mt-12 gap-5">
-            <div class="">
-              <h6 class="font-body-regular text-base text-[#3E3E3E]">Maximum available Loan</h6>
-              <span class="font-body-bold text-base text-main">$10K - $150k</span>
-            </div>
-            <div class="">
-              <h6 class="font-body-regular text-base text-[#3E3E3E]">Amortization</h6>
-              <span class="font-body-medium text-base text-black">Min. 8yrs - Max. 15yrs</span>
-            </div>
-            <div class="flex flex-col gap-2">
-              <h6 class="font-body-regular text-base text-[#3E3E3E]">Modalities</h6>
-              <span class="font-body-medium text-base text-black"> >50k 10% deposit minimum</span>
-              <span class="font-body-medium text-base text-black"> {`<50k 5% deposit minimum`} </span>
-            </div>
-             <div class="">
-              <h6 class="font-body-regular text-base text-[#3E3E3E]">Interest rate</h6>
-              <span class="font-body-medium text-base text-black">Prime + 4%</span>
-            </div>
-       
+        <h1 class="max-w-xl font-body-bold text-2xl md:text-5xl">
+          Loan calculator.
+        </h1>
+        <!-- <p class="max-w-2xl font-body-medium text-sm md:text-base text-[#707070] mt-4">The idea for Motherland was born from my hearing the incessant stories of hardworking diaspora Nigerians who have had their life's earnings squandered by someone who they trusted to build their retirement home.</p> -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 mt-6 md:mt-12 lg:mt-12 xl:mt-12 gap-5"
+        >
+          <div class="">
+            <h6 class="font-body-regular text-base text-[#3E3E3E]">
+              Maximum available Loan
+            </h6>
+            <span class="font-body-bold text-base text-main">$10K - $150k</span>
           </div>
+          <div class="">
+            <h6 class="font-body-regular text-base text-[#3E3E3E]">
+              Amortization
+            </h6>
+            <span class="font-body-medium text-base text-black"
+              >Min. 8yrs - Max. 15yrs</span
+            >
+          </div>
+          <div class="flex flex-col gap-2">
+            <h6 class="font-body-regular text-base text-[#3E3E3E]">
+              Modalities
+            </h6>
+            <span class="font-body-medium text-base text-black">
+              >50k 10% deposit minimum</span
+            >
+            <span class="font-body-medium text-base text-black">
+              {`<50k 5% deposit minimum`}
+            </span>
+          </div>
+          <div class="">
+            <h6 class="font-body-regular text-base text-[#3E3E3E]">
+              Interest rate
+            </h6>
+            <span class="font-body-medium text-base text-black">Prime + 4%</span
+            >
+          </div>
+        </div>
       </div>
-      <div class="bg-white border-[1px] p-4 mt-5 md:mt-0 md:p-6 lg:p-10 xl:p-10 border-[#E6E8E9] rounded-3xl">
-        <ReactCalc client:only="react"/>
+      <div
+        class="bg-white border-[1px] p-4 mt-5 md:mt-0 md:p-6 lg:p-10 xl:p-10 border-[#E6E8E9] rounded-3xl"
+      >
+        <ReactCalc client:only="react" />
       </div>
     </section>
   </ThemeWrapper>

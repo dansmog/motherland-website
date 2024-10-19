@@ -1,63 +1,90 @@
 ---
 import ThemeWrapper from "../components/ThemeWrapper.astro";
 
-
 const data = [
   {
     id: "01",
     title: "Indicate interest & authorization",
-    body: "The initial setup should only take about 15 minutes. You’ll get the first insights immediately. Teams can be onboarded later at any time."
+    body: "The initial setup should only take about 15 minutes. You’ll get the first insights immediately. Teams can be onboarded later at any time.",
   },
-    {
+  {
     id: "02",
     title: "Pre-approval",
-    body: "The initial setup should only take about 15 minutes. You’ll get the first insights immediately. Teams can be onboarded later at any time."
+    body: "The initial setup should only take about 15 minutes. You’ll get the first insights immediately. Teams can be onboarded later at any time.",
   },
-      {
+  {
     id: "03",
     title: "Find and approve properties",
-    body: "The initial setup should only take about 15 minutes. You’ll get the first insights immediately. Teams can be onboarded later at any time."
+    body: "The initial setup should only take about 15 minutes. You’ll get the first insights immediately. Teams can be onboarded later at any time.",
   },
-        {
+  {
     id: "04",
     title: "Purchasing and legal",
-    body: "The initial setup should only take about 15 minutes. You’ll get the first insights immediately. Teams can be onboarded later at any time."
+    body: "The initial setup should only take about 15 minutes. You’ll get the first insights immediately. Teams can be onboarded later at any time.",
   },
-    {
+  {
     id: "05",
     title: "Insurance",
-    body: "The initial setup should only take about 15 minutes. You’ll get the first insights immediately. Teams can be onboarded later at any time."
+    body: "The initial setup should only take about 15 minutes. You’ll get the first insights immediately. Teams can be onboarded later at any time.",
   },
-      {
+  {
     id: "06",
     title: "Move in",
-    body: "The initial setup should only take about 15 minutes. You’ll get the first insights immediately. Teams can be onboarded later at any time."
+    body: "The initial setup should only take about 15 minutes. You’ll get the first insights immediately. Teams can be onboarded later at any time.",
   },
-]
+];
 ---
 
-<section class="bg-white pt-10 md:pt-24 pb-5 md:pb-28" id="ourmodel">
+<section class="bg-white pt-10 md:pt-24 pb-5 md:pb-28">
   <!-- <div class="dotted-lines"></div> -->
   <ThemeWrapper>
     <section class="w-full flex flex-col">
-      <header class="flex flex-col lg:flex-row xl:flex-row justify-between lg:items-end xl:items-end">
+      <header
+        class="flex flex-col lg:flex-row xl:flex-row justify-between lg:items-end xl:items-end"
+      >
         <div class="flex flex-col gap-2 md:gap-6">
-          <h1 class="max-w-xl font-body-bold text-2xl md:text-5xl">We understand what it means to have a home.</h1>
-          <p class="max-w-2xl font-body-medium text-sm md:text-base text-[#707070]">The idea for Motherland was born from my hearing the incessant stories of hardworking diaspora Nigerians who have had their life's earnings squandered by someone who they trusted to build their retirement home. This is an unreliable retirement strategy for many diaspora Nigerians, who fall victim everyday.</p>
+          <span class="text-sm text-[#FFB800] font-body-medium">Our Model</span>
+          <h1 class="max-w-xl font-body-bold text-2xl md:text-5xl">
+            We understand what it means to have a home.
+          </h1>
+          <p
+            class="max-w-2xl font-body-medium text-sm md:text-base text-[#707070]"
+          >
+            The idea for Motherland was born from my hearing the incessant
+            stories of hardworking diaspora Nigerians who have had their life's
+            earnings squandered by someone who they trusted to build their
+            retirement home. This is an unreliable retirement strategy for many
+            diaspora Nigerians, who fall victim everyday.
+          </p>
         </div>
-        <button  data-join-waitlist class="bg-main text-base font-body-bold rounded-lg py-[13px] px-8 text-white mt-5 lg:mt-0 xl:mt-0">Join our waitlist</button>
+        <button
+          data-join-waitlist
+          class="bg-main text-base font-body-bold rounded-lg py-[13px] px-8 text-white mt-5 lg:mt-0 xl:mt-0"
+          >Join our waitlist</button
+        >
       </header>
-      <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mt-6 md:mt-12 gap-4 md:gap-8">
-        {data?.map(item => {
-          return     <div class="w-full bg-lightMain py-8 md:py-12 px-5 md:px-8">
-          <span class="font-body-bold text-xl md:text-2xl bg-white rounded-lg flex justify-center items-center h-14 w-14">{item?.id}</span>
-          <h5 class="text-lg font-body-bold pt-6 pb-3">{item?.title}</h5>
-          <p class="text-sm md:text-base font-body-regular text-[#707070]">{item?.body}</p>
-        </div>
-        })}
-    
+      <section
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mt-6 md:mt-12 gap-4 md:gap-8"
+      >
+        {
+          data?.map((item) => {
+            return (
+              <div class="w-full bg-lightMain py-8 md:py-12 px-5 md:px-8">
+                <span class="font-body-bold text-xl md:text-2xl bg-white rounded-lg flex justify-center items-center h-14 w-14">
+                  {item?.id}
+                </span>
+                <h5 class="text-lg font-body-bold pt-6 pb-3">{item?.title}</h5>
+                <p
+                  class="text-sm md:text-base font-body-regular text-[#707070]"
+                  id="ourmodel"
+                >
+                  {item?.body}
+                </p>
+              </div>
+            );
+          })
+        }
       </section>
-
     </section>
   </ThemeWrapper>
 </section>
