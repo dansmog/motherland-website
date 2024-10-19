@@ -1,6 +1,6 @@
 ---
 interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
@@ -8,66 +8,54 @@ const { title } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
- <meta
-    name="description"
-    content="Motherland - Own a property back in Nigeria with our hassle free mortgage plans"
-  />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta
+      name="description"
+      content="Motherland - Own a property back in Nigeria with our hassle free mortgage plans"
+    />
 
-  <!-- Facebook Meta Tags -->
-  <meta property="og:url" content="https:motherland.com/" />
-  <meta property="og:type" content="website" />
-  <meta
-    property="og:title"
-    content="Motherland - Own a property back in Nigeria with our hassle free mortgage plans"
-  />
-  <meta
-    property="og:description"
-    content=""
-  />
-  <meta
-    property="og:image"
-content="../images/hero.jpg"
-  />
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https:motherland.com/" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Motherland - Own a property back in Nigeria with our hassle free mortgage plans"
+    />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="../images/hero.jpg" />
 
-  <!-- Twitter Meta Tags -->
-  <meta property="twitter:creator" content="@motherland" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta property="twitter:domain" content="motherland.com" />
-  <meta property="twitter:url" content="https://motherland.com" />
-  <meta
-    name="twitter:title"
-    content="Motherland - Own a property back in Nigeria with our hassle free mortgage plans"
-  />
-  <meta
-    name="twitter:description"
-    content="Motherland - Own a property back in Nigeria with our hassle free mortgage plans"
-  />
-  <meta
-    name="twitter:image"
-    content="../images/hero.jpg"
-  />
+    <!-- Twitter Meta Tags -->
+    <meta property="twitter:creator" content="@motherland" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="motherland.com" />
+    <meta property="twitter:url" content="https://motherland.com" />
+    <meta
+      name="twitter:title"
+      content="Motherland - Own a property back in Nigeria with our hassle free mortgage plans"
+    />
+    <meta
+      name="twitter:description"
+      content="Motherland - Own a property back in Nigeria with our hassle free mortgage plans"
+    />
+    <meta name="twitter:image" content="../images/hero.jpg" />
 
-  <meta
-    property="og:image"
-  content="../images/hero.jpg"
-  />
-  <meta property="og:image:width" content="1000" />
-  <meta property="og:image:height" content="593" />
+    <meta property="og:image" content="../images/hero.jpg" />
+    <meta property="og:image:width" content="1000" />
+    <meta property="og:image:height" content="593" />
 
-  <meta property="og:type" content="website" />
-  <meta
-    property="og:description"
-    content="Motherland - Own a property back in Nigeria with our hassle free mortgage plans"
-  />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:description"
+      content="Motherland - Own a property back in Nigeria with our hassle free mortgage plans"
+    />
 
-     <script>
+    <script>
       var scrollLinks = document.querySelectorAll('a[href^="#"]');
       var scrollOffset = 0;
 
@@ -90,124 +78,132 @@ content="../images/hero.jpg"
           }
         });
       });
-
-
     </script>
-	</head>
-	<body>
-		<slot />
-	</body>
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>
 
 <style is:global>
-@font-face {
-  font-family: 'Satoshi-Black';
-  src: url('/fonts/Satoshi-Black.woff2') format('woff2'),
-       url('/fonts/Satoshi-Black.woff') format('woff'),
-       url('/fonts/Satoshi-Black.ttf') format('truetype');
-       font-weight: 900;
-       font-display: swap;
-       font-style: normal;
-}
+  @font-face {
+    font-family: "Satoshi-Black";
+    src:
+      url("/fonts/Satoshi-Black.woff2") format("woff2"),
+      url("/fonts/Satoshi-Black.woff") format("woff"),
+      url("/fonts/Satoshi-Black.ttf") format("truetype");
+    font-weight: 900;
+    font-display: swap;
+    font-style: normal;
+  }
 
-@font-face {
-  font-family: 'Satoshi-Bold';
-  src: url('/fonts/Satoshi-Bold.woff2') format('woff2'),
-       url('/fonts/Satoshi-Bold.woff') format('woff'),
-       url('/fonts/Satoshi-Bold.ttf') format('truetype');
-       font-weight: 700;
-       font-display: swap;
-       font-style: normal;
-}
+  @font-face {
+    font-family: "Satoshi-Bold";
+    src:
+      url("/fonts/Satoshi-Bold.woff2") format("woff2"),
+      url("/fonts/Satoshi-Bold.woff") format("woff"),
+      url("/fonts/Satoshi-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-display: swap;
+    font-style: normal;
+  }
 
-@font-face {
-  font-family: 'Satoshi-Medium';
-  src: url('/fonts/Satoshi-Medium.woff2') format('woff2'),
-       url('/fonts/Satoshi-Medium.woff') format('woff'),
-       url('/fonts/Satoshi-Medium.ttf') format('truetype');
-       font-weight: 500;
-       font-display: swap;
-       font-style: normal;
-}
+  @font-face {
+    font-family: "Satoshi-Medium";
+    src:
+      url("/fonts/Satoshi-Medium.woff2") format("woff2"),
+      url("/fonts/Satoshi-Medium.woff") format("woff"),
+      url("/fonts/Satoshi-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-display: swap;
+    font-style: normal;
+  }
 
-@font-face {
-  font-family: 'Satoshi-Regular';
-  src: url('/fonts/Satoshi-Regular.woff2') format('woff2'),
-       url('/fonts/Satoshi-Regular.woff') format('woff'),
-       url('/fonts/Satoshi-Regular.ttf') format('truetype');
-       font-weight: 400;
-       font-display: swap;
-       font-style: normal;
-}
+  @font-face {
+    font-family: "Satoshi-Regular";
+    src:
+      url("/fonts/Satoshi-Regular.woff2") format("woff2"),
+      url("/fonts/Satoshi-Regular.woff") format("woff"),
+      url("/fonts/Satoshi-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+  }
 
-@font-face {
-  font-family: 'Satoshi-Light';
-  src: url('/fonts/Satoshi-Light.woff2') format('woff2'),
-       url('/fonts/Satoshi-Light.woff') format('woff'),
-       url('/fonts/Satoshi-Light.ttf') format('truetype');
-       font-weight: 300;
-       font-display: swap;
-       font-style: normal;
-}
+  @font-face {
+    font-family: "Satoshi-Light";
+    src:
+      url("/fonts/Satoshi-Light.woff2") format("woff2"),
+      url("/fonts/Satoshi-Light.woff") format("woff"),
+      url("/fonts/Satoshi-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-display: swap;
+    font-style: normal;
+  }
 
+  :root {
+    --accent: 136, 58, 234;
+    --accent-light: 224, 204, 250;
+    --accent-dark: 49, 10, 101;
+    --accent-gradient: linear-gradient(
+      45deg,
+      rgb(var(--accent)),
+      rgb(var(--accent-light)) 30%,
+      white 60%
+    );
+    --body-bold: "Satoshi-Bold";
+    --body-black: "Satoshi-Black";
+    --body-medium: "Satoshi-Medium";
+    --body-regular: "Satoshi-Regular";
+    --body-light: "Satoshi-Light";
+  }
+  html {
+    font-family: system-ui, sans-serif;
+  }
 
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-		--body-bold: "Satoshi-Bold";
-		--body-black: "Satoshi-Black";
-		--body-medium: "Satoshi-Medium";
-		--body-regular: "Satoshi-Regular";
-		--body-light: "Satoshi-Light";
-	}
-	html {
-		font-family: system-ui, sans-serif;
-	}
-
-
-
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
-	.dotted-lines {
-            display: grid;
-            grid-template-columns: repeat(5, 1px);
-            justify-content: space-between;
-            width: 2px;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 0;
-        }
-        .dotted-lines::before {
-            content: "";
-            grid-column: span 1;
-            background-image: linear-gradient(to bottom, #E7E2E2 33%, rgba(255,255,255,0) 0%);
-            background-position: right;
-            background-size: 1px 15px;
-            background-repeat: repeat-y;
-        }
-				.hero {
-					background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.14) 0%, rgb(0, 0, 0) 89%), url("../images/hero.jpg");
-					background-repeat: no-repeat;
-					background-size: cover;
-					background-position: center center;
-				}
-
+  code {
+    font-family:
+      Menlo,
+      Monaco,
+      Lucida Console,
+      Liberation Mono,
+      DejaVu Sans Mono,
+      Bitstream Vera Sans Mono,
+      Courier New,
+      monospace;
+  }
+  .dotted-lines {
+    display: grid;
+    grid-template-columns: repeat(5, 1px);
+    justify-content: space-between;
+    width: 2px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+  .dotted-lines::before {
+    content: "";
+    grid-column: span 1;
+    background-image: linear-gradient(
+      to bottom,
+      #e7e2e2 33%,
+      rgba(255, 255, 255, 0) 0%
+    );
+    background-position: right;
+    background-size: 1px 15px;
+    background-repeat: repeat-y;
+  }
+  .hero {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.14) 0%,
+        rgb(0, 0, 0) 89%
+      ),
+      url("../images/hero.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
 </style>
