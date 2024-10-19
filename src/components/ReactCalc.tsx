@@ -15,7 +15,6 @@ const ReactCalc = () => {
 
   const onHandleChange = (event) => {
     const { name, value } = event.target;
-    console.log(event.target.rawValue);
     setData({
       ...data,
       [name]: value,
@@ -24,8 +23,9 @@ const ReactCalc = () => {
 
   useEffect(() => {
     if (data?.amortization && data?.amount && data?.downPayment && data?.time) {
-      const principal =
-        parseFloat(data?.amount) - parseFloat(data?.downPayment);
+      const downPaymentResult =
+        (parseFloat(data?.downPayment) / 100) * parseFloat(data?.amount);
+      const principal = parseFloat(data?.amount) - downPaymentResult;
       const monthlyRate = INTEREST_RATE / 100 / 12;
       const numberOfPayments = parseFloat(data?.amortization) * 12;
 
@@ -34,11 +34,11 @@ const ReactCalc = () => {
           (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments))) /
         (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
 
-      const yearlyPayment = monthlyPayment * 12;
+      const biweeklyPayment = monthlyPayment / 2;
       const totalPayment = monthlyPayment * numberOfPayments;
 
       setPaybackAmount(
-        data?.time === "monthly" ? monthlyPayment : yearlyPayment,
+        data?.time === "monthly" ? monthlyPayment : biweeklyPayment
       );
     }
   }, [data]);
@@ -63,18 +63,14 @@ const ReactCalc = () => {
       </div>
       <div className="flex flex-col gap-2">
         <label className="font-body-medium text-sm">
-          How much down payment?
+          How much down payment in %?
         </label>
 
-        <CurrencyFormat
-          thousandSeparator={true}
-          prefix={"CA$"}
-          onValueChange={(values) => {
-            setData({ ...data, downPayment: values?.value });
-          }}
+        <input
+          onChange={onHandleChange}
           name="downPayment"
           className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
-          placeholder="50,000 CAD"
+          placeholder="10"
         />
       </div>
       <div className="flex flex-col md:flex-row gap-4 items-center">
@@ -114,16 +110,17 @@ const ReactCalc = () => {
             Monthly
           </div>
           <div
-            className={`${data?.time === "yearly" ? "bg-main text-white" : "bg-slate-100 text-black"} text-base font-body-medium  px-6 py-3 rounded-lg cursor-pointer`}
-            onClick={() => setData({ ...data, time: "yearly" })}
+            className={`${data?.time === "biweekly" ? "bg-main text-white" : "bg-slate-100 text-black"} text-base font-body-medium  px-6 py-3 rounded-lg cursor-pointer`}
+            onClick={() => setData({ ...data, time: "biweekly" })}
           >
-            Yearly
+            Bi-weekly
           </div>
         </div>
       </div>
       <div className="flex flex-col gap-2 mt-5">
         <span className="text-base font-body-medium">
-          Total amount to repay {data?.time}
+          Total amount to repay{" "}
+          {data?.time === "biweekly" ? "Bi-weekly" : data?.time}
         </span>
         <span className="text-2xl font-body-bold text-main">
           CA$ {paybackAmount.toFixed(2)}
