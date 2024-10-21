@@ -5,40 +5,40 @@ import ThemeWrapper from "./ThemeWrapper.astro";
 <script>
   const faqData = [
     {
-      question: "⁠How is WaitlistPro different from other waitlist builders?",
+      question: `How soon can I start borrowing money from Motherland?`,
       answer: `
-      <p class="font-gilroy-regular text-sm leading-relaxed text-black">
-       WaitlistPro specializes in creating engaging, high-converting waitlists with a comprehensive toolkit that includes rich media integration, payment processing, countdown timers, and social media features to help your pre-launch campaign stand out and drive conversions.
+      <p class="font-body-regular text-sm leading-relaxed text-black">
+      We are still in the process of building our web and mobile applications, as well as ironing out the kinks in cross-border financing and regulations. But feel free to join the waiting list as we project a launch date somewhere around Q2 2025.
+
       </p>
       
     `,
     },
     {
-      question: "⁠When will I get access to the product?",
-      answer: `<p class='font-body-regular text-sm text-black leading-relaxed'>WaitlistPro launches on September 9th, offering immediate access to core features while premium features roll out progressively—all included for lifetime buyers at no extra cost.</p>`,
+      question: "⁠What will you do with the personal data you collect?",
+      answer: `<p class='font-body-regular text-sm text-black leading-relaxed'>We strive to respect the privacy of our users, and store the data in an encrypted system, only retrievable by authorized persons for future communications about our services. See our [Privacy Statement]  <a href="privacy.html" class="text-underline text-blue-600">Privacy policy</a> for more details.
+</p>`,
     },
     {
-      question: "⁠⁠Is there a refund?",
+      question: "Can I get a construction loan to build in my village?",
       answer:
-        "<p class='font-gilroy-regular text-sm text-black leading-relaxed'>Yes, if at any point you want a refund, you can request one, however this means you account would be downgraded to free version which has limited features.</p>",
+        "<p class='font-body-regular text-sm text-black leading-relaxed'>No. We do not offer construction loans for now, and when we do in the future, it'll only be in select high population cities.</p>",
     },
-        {
-      question: "⁠⁠Hassle free mortgage?",
+    {
+      question: "⁠⁠What if I change my mind?",
       answer:
-        "<p class='font-gilroy-regular text-sm text-black leading-relaxed'>Yes, if at any point you want a refund, you can request one, however this means you account would be downgraded to free version which has limited features.</p>",
+        "<p class='font-body-regular text-sm text-black leading-relaxed'>If you change your mind before you make a down payment, you can just walk away; but if you've made a down payment and the mortgage has been secured, you will have to forfeit your down payment.</p>",
     },
-        {
-      question: "⁠⁠What's the interest rate and how can i pay back?",
+    {
+      question: "⁠Will I get a physical tour of the property?",
       answer:
-        "<p class='font-gilroy-regular text-sm text-black leading-relaxed'>Yes, if at any point you want a refund, you can request one, however this means you account would be downgraded to free version which has limited features.</p>",
+        "<p class='font-body-regular text-sm text-black leading-relaxed'>We do not offer a physical tour of the property. The buyer will have to personally arrange a trip to Nigeria to go see the property themselves, if our ground team's virtual tour is insufficient.</p>",
     },
-        {
-      question: "⁠⁠Is there a refund?",
+    {
+      question: "⁠What if I miss a period of payment?",
       answer:
-        "<p class='font-gilroy-regular text-sm text-black leading-relaxed'>Yes, if at any point you want a refund, you can request one, however this means you account would be downgraded to free version which has limited features.</p>",
+        "<p class='font-body-regular text-sm text-black leading-relaxed'>We'll offer insurance products that cover you for unexpected health, unemployment, disability circumstances that may prevent you from fulfilling your monthly/bi-weekly payment obligation, so that you don't get a penalty on your credit score.</p>",
     },
-
-
   ];
 
   function createFAQPanels() {
@@ -49,7 +49,7 @@ import ThemeWrapper from "./ThemeWrapper.astro";
       panelDiv.className = `border-[0.5px] bg-white rounded-lg border-white border-opacity-20 p-4 ${index > 0 ? "mt-3" : ""}`;
 
       panelDiv.innerHTML = `
-      <span class="accordion flex items-center justify-between cursor-pointer text-black text-base light font-body-regular">
+      <span class="accordion flex items-center justify-between cursor-pointer text-black text-base light font-body-medium">
         ${item.question}
         <span>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -70,61 +70,64 @@ import ThemeWrapper from "./ThemeWrapper.astro";
   }
 
   function addAccordionListeners() {
-  const accordions = document.getElementsByClassName("accordion");
+    const accordions = document.getElementsByClassName("accordion");
 
-  for (let i = 0; i < accordions.length; i++) {
-    accordions[i].addEventListener("click", function(this: HTMLElement) {
-      // Close all panels
-      for (let j = 0; j < accordions.length; j++) {
-        if (accordions[j] !== this) {
-          accordions[j].classList.remove("active");
-          const panel = accordions[j].nextElementSibling as HTMLElement;
+    for (let i = 0; i < accordions.length; i++) {
+      accordions[i].addEventListener("click", function (this: HTMLElement) {
+        // Close all panels
+        for (let j = 0; j < accordions.length; j++) {
+          if (accordions[j] !== this) {
+            accordions[j].classList.remove("active");
+            const panel = accordions[j].nextElementSibling as HTMLElement;
+            panel.style.display = "none";
+            const icon = accordions[j].querySelector("svg");
+            if (icon) {
+              icon.style.transform = "rotate(0deg)";
+            }
+          }
+        }
+
+        // Toggle the clicked panel
+        this.classList.toggle("active");
+        const panel = this.nextElementSibling as HTMLElement;
+        const icon = this.querySelector("svg");
+
+        if (panel.style.display === "block") {
           panel.style.display = "none";
-          const icon = accordions[j].querySelector("svg");
           if (icon) {
             icon.style.transform = "rotate(0deg)";
           }
+        } else {
+          panel.style.display = "block";
+          if (icon) {
+            icon.style.transform = "rotate(45deg)";
+          }
         }
-      }
-
-      // Toggle the clicked panel
-      this.classList.toggle("active");
-      const panel = this.nextElementSibling as HTMLElement;
-      const icon = this.querySelector("svg");
-
-      if (panel.style.display === "block") {
-        panel.style.display = "none";
-        if (icon) {
-          icon.style.transform = "rotate(0deg)";
-        }
-      } else {
-        panel.style.display = "block";
-        if (icon) {
-          icon.style.transform = "rotate(45deg)";
-        }
-      }
-    });
+      });
+    }
   }
-}
 
   // Call the function to create the FAQ panels
   createFAQPanels();
 </script>
 
-<section class="bg-[#F7FAF7] w-full relative py-10 mb:py-32 mt-14 mb:mt-20 mb-16" id="faqs">
+<section
+  class="bg-[#F7FAF7] w-full relative py-10 mb:py-32 mt-14 mb:mt-20 mb-16"
+  id="faqs"
+>
   <ThemeWrapper>
     <div class="max-w-[654px] mx-auto">
       <h1
         class="text-2xl md:text-3xl xl:text-5xl font-body-medium text-center text-black md:leading-[48px] xl:leading-[4rem]"
       >
-      Frequently Asked Questions
+        Frequently Asked Questions
       </h1>
       <p
         class="text-black font-body-medium text-sm md:text-base md:leading-relaxed text-center mt-3"
       >
-    These are the most commonly asked question about motherland.
-can’t find what you are looking for? <a
-          href="https://x.com/paulwaweruco"
+        These are the most commonly asked question about motherland. can’t find
+        what you are looking for? <a
+          href="mailto:info@motherland.homes"
           target="_blank"
           class="underline">contact us here.</a
         >
