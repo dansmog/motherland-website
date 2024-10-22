@@ -1,5 +1,4 @@
 import { useState } from "react";
-import CurrencyFormat from "react-currency-format";
 
 const PartnershipReactForm = () => {
   const [data, setData] = useState({

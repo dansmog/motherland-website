@@ -1,12 +1,15 @@
 ---
 import { Image } from "astro:assets";
 import LogoWhite from "../images/fullwhite_logo.png";
+import GreenLogo from "../images/fullgreen_logo.png";
 
 interface Props {
   navList: { title: string; url: string }[];
+  bg?: string;
+  currentPath?: string;
 }
 
-const { navList } = Astro.props;
+const { navList, bg, currentPath } = Astro.props;
 ---
 
 <script>
@@ -57,24 +60,29 @@ const { navList } = Astro.props;
 
 <header
   class="px-4 text-white bg-transparent w-full flex py-6 mx-auto items-center text-base text-primary"
+  style={{ background: bg, color: bg ? "black" : "white" }}
 >
   <div class="flex-1">
-    <div class="">
+    <a class="" href="/">
       <Image
-        src={LogoWhite}
+        src={bg ? GreenLogo : LogoWhite}
         alt="motherland logo"
         decoding="async"
         loading="lazy"
         class="h-8 w-auto"
       />
-    </div>
+    </a>
   </div>
   <div class="hidden mx-auto xl:flex items-center space-x-7" id="navlinks">
     {
       navList?.map((list) => {
+        const url = currentPath?.includes("privacy")
+          ? `/${list.url}`
+          : `${list.url}`;
+
         return (
           <div>
-            <a href={list?.url} class="font-body-medium text-base capitalize">
+            <a href={url} class="font-body-medium text-base capitalize">
               {list?.title}
             </a>
           </div>
@@ -90,7 +98,13 @@ const { navList } = Astro.props;
     >
   </div>
   <span class="flex md:hidden lg:hidden md:ml-6 lg:ml-0 mt-4" id="menuIcon">
-    <img src="./images/menu.svg" />
+    {
+      bg ? (
+        <img src="./images/blackMenu.svg" />
+      ) : (
+        <img src="./images/menu.svg" />
+      )
+    }
   </span>
 
   <div
@@ -100,7 +114,7 @@ const { navList } = Astro.props;
   >
     <div class="w-full flex justify-between items-center mt-5">
       <Image
-        src={LogoWhite}
+        src={bg ? GreenLogo : LogoWhite}
         alt="motherland logo"
         decoding="async"
         loading="lazy"
