@@ -162,10 +162,10 @@ const ReactCalc = () => {
               thousandSeparator={true}
               prefix={"CA$"}
               displayType="text"
-              value={
+              value={(
                 (parseFloat(data?.downPayment) / 100) *
                 parseFloat(data?.propertyAmount)
-              }
+              ).toFixed(2)}
             />
           </span>
         ) : null}
