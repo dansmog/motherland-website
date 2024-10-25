@@ -223,7 +223,7 @@ const ReactCalc = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row items-center md:justify-between">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between">
         <div className="flex flex-col gap-2 mt-5">
           <span className="text-base font-body-medium">
             Total Loan available
