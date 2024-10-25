@@ -5,7 +5,7 @@ const data = [
   {
     id: "01",
     title: "Indicate interest & authorization",
-    body: "You the buyer expresses interest and grants authorization to the mortgage provider to verify their eligibility.",
+    body: "The buyer expresses interest and grants authorization to the mortgage provider to verify their eligibility.",
   },
   {
     id: "02",
@@ -38,12 +38,14 @@ const data = [
 <section class="bg-white pt-10 md:pt-24 pb-5 md:pb-28">
   <!-- <div class="dotted-lines"></div> -->
   <ThemeWrapper>
-    <section class="w-full flex flex-col">
+    <section class="w-full flex flex-col" id="ourmodel">
       <header
         class="flex flex-col lg:flex-row xl:flex-row justify-between lg:items-end xl:items-end"
       >
         <div class="flex flex-col gap-2 md:gap-6">
-          <span class="text-sm text-[#FFB800] font-body-medium">Our Model</span>
+          <span class="text-sm text-[#FFB800] font-body-medium"
+            >Our Model - how we work</span
+          >
           <h1 class="max-w-xl font-body-bold text-2xl md:text-4xl">
             A Seamless Process. The steps should be updated as follows:
           </h1>
@@ -74,10 +76,7 @@ const data = [
                   {item?.id}
                 </span>
                 <h5 class="text-lg font-body-bold pt-6 pb-3">{item?.title}</h5>
-                <p
-                  class="text-sm md:text-base font-body-regular text-[#707070]"
-                  id="ourmodel"
-                >
+                <p class="text-sm md:text-base font-body-regular text-[#707070]">
                   {item?.body}
                 </p>
               </div>
