@@ -5,14 +5,17 @@ const WaitlistReactForm = () => {
   const [data, setData] = useState({
     location: "Lagos",
     downPayment: "",
-    amount: "",
-    canadianStatus: "Permanent resident",
+    budget: "",
+    status: "Permanent resident",
+    countryOfResidence: "Canada",
     fullName: "",
     email: "",
     creditScore: "",
     phone: "",
     date: "",
-    durationInCanada: "",
+    durationInCountry: "",
+    jobStatus: null,
+    existingMortgage: null,
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -28,7 +31,6 @@ const WaitlistReactForm = () => {
   };
 
   const onHandleSubmit = async () => {
-    console.log(data);
     setLoading(true);
     const payload = { ...data };
     try {
@@ -44,7 +46,6 @@ const WaitlistReactForm = () => {
       }
       setLoading(false);
       setSuccess(true);
-      console.log(response.json());
     } catch (error) {
       setLoading(false);
       window.alert("Failed to join, please try again");
@@ -54,14 +55,18 @@ const WaitlistReactForm = () => {
 
   const isDisabled =
     !data?.location.length ||
-    !data?.amount.length ||
-    !data?.canadianStatus.length ||
+    !data?.budget.length ||
+    !data?.status.length ||
     !data?.downPayment.length ||
     !data?.fullName.length ||
     !data?.creditScore.length ||
     !data?.email.length ||
     !data?.phone.length ||
-    !data?.durationInCanada.length ||
+    !data?.durationInCountry.length ||
+    !data?.jobStatus ||
+    data?.jobStatus === null ||
+    !data?.existingMortgage ||
+    data?.existingMortgage === null ||
     !data?.date.length;
 
   return (
@@ -122,22 +127,115 @@ const WaitlistReactForm = () => {
               />
             </div>
           </div>
+
           <div className="flex flex-col md:flex-row gap-4 items-center mt-4">
             <div className="flex flex-col gap-1 w-full">
               <label className="font-body-medium text-sm text-[#666666]">
-                What's your Canadian phone number?
+                Do you currently have a job?
+              </label>
+              <div className="flex items-center gap-5">
+                <label className="font-body-medium text-base flex gap-2">
+                  <input
+                    type="radio"
+                    name="jobStatus"
+                    value="Yes"
+                    checked={data?.jobStatus === "Yes"}
+                    onChange={onHandleChange}
+                  />
+                  Yes
+                </label>
+
+                <label className="font-body-medium text-base flex gap-2">
+                  <input
+                    type="radio"
+                    name="jobStatus"
+                    value="No"
+                    checked={data?.jobStatus === "No"}
+                    onChange={onHandleChange}
+                  />
+                  No
+                </label>
+              </div>
+            </div>
+            <div className="flex flex-col gap-1 w-full">
+              <label className="font-body-medium text-sm text-[#666666]">
+                What is your marital status?
+              </label>
+              <select
+                name="maritalStatus"
+                onChange={onHandleChange}
+                className="w-full  border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
+              >
+                <option>Single</option>
+                <option>Married</option>
+                <option>Divorced</option>
+                <option>Single parent</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-4 items-center mt-4">
+            <div className="flex flex-col gap-1 w-full">
+              <label className="font-body-medium text-sm text-[#666666]">
+                What's your phone number?
               </label>
               <input
                 type="text"
                 name="phone"
-                className="w-full  border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
-                placeholder="E.g +1(647)234-5678"
+                className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
+                placeholder="e.g +1(647) 234-5678"
                 onChange={onHandleChange}
               />
             </div>
             <div className="flex flex-col gap-1 w-full">
               <label className="font-body-medium text-sm text-[#666666]">
-                Where would the property be located?
+                Country of Residence?
+              </label>
+              <select
+                name="countryOfResidence"
+                onChange={onHandleChange}
+                className="w-full  border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
+              >
+                <option>Canada</option>
+                <option>United states</option>
+                <option>United Kingdom</option>
+                <option>Europe</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-4 items-center mt-4">
+            <div className="flex flex-col gap-1 w-full">
+              <label className="font-body-medium text-sm text-[#666666]">
+                What's your status in {data?.countryOfResidence}?
+              </label>
+              <select
+                name="status"
+                className="w-full  border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
+                onChange={onHandleChange}
+              >
+                <option>Permanent Resident</option>
+                <option>Citizen</option>
+              </select>
+            </div>
+            <div className="flex flex-col gap-1 w-full">
+              <label className="font-body-medium text-sm text-[#666666]">
+                How long have you been in {data?.countryOfResidence}?
+              </label>
+              <input
+                type="text"
+                name="durationInCountry"
+                className="w-full  border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
+                placeholder="Please enter this is years"
+                onChange={onHandleChange}
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-4 items-center mt-4">
+            <div className="flex flex-col gap-1 w-full">
+              <label className="font-body-medium text-sm text-[#666666]">
+                Where are you looking to purchase a property?
               </label>
               <select
                 name="location"
@@ -151,12 +249,9 @@ const WaitlistReactForm = () => {
                 <option>Enugu</option>
               </select>
             </div>
-          </div>
-
-          <div className="flex flex-col md:flex-row gap-4 items-center mt-4">
             <div className="flex flex-col gap-1 w-full">
               <label className="font-body-medium text-sm text-[#666666]">
-                When do you want this property?
+                What is the timeline for purchasing the property?
               </label>
               <input
                 type="date"
@@ -166,24 +261,24 @@ const WaitlistReactForm = () => {
                 onChange={onHandleChange}
               />
             </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-4 items-center mt-4">
             <div className="flex flex-col gap-1 w-full">
               <label className="font-body-medium text-sm text-[#666666]">
-                How much is the property?
+                How much is your budget?
               </label>
               <CurrencyFormat
                 thousandSeparator={true}
                 prefix={"CA$"}
                 onValueChange={(values) => {
-                  setData({ ...data, amount: values?.value });
+                  setData({ ...data, budget: values?.value });
                 }}
-                name="amount"
+                name="budget"
                 className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
                 placeholder="50,000 CAD"
               />
             </div>
-          </div>
-
-          <div className="flex flex-col md:flex-row gap-4 items-center mt-4">
             <div className="flex flex-col gap-1 w-full">
               <label className="font-body-medium text-sm text-[#666666]">
                 Available down payment
@@ -199,37 +294,12 @@ const WaitlistReactForm = () => {
                 placeholder="50,000 CAD"
               />
             </div>
-            <div className="flex flex-col gap-1 w-full">
-              <label className="font-body-medium text-sm text-[#666666]">
-                What's your Canadian status?
-              </label>
-              <select
-                name="canadianStatus"
-                className="w-full  border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
-                onChange={onHandleChange}
-              >
-                <option>Permanent Resident</option>
-                <option>Citizen</option>
-              </select>
-            </div>
           </div>
 
           <div className="flex flex-col md:flex-row gap-4 items-center mt-4">
             <div className="flex flex-col gap-1 w-full">
               <label className="font-body-medium text-sm text-[#666666]">
-                How long have you been in canada?
-              </label>
-              <input
-                type="text"
-                name="durationInCanada"
-                className="w-full  border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
-                placeholder="Please enter this is years"
-                onChange={onHandleChange}
-              />
-            </div>
-            <div className="flex flex-col gap-1 w-full">
-              <label className="font-body-medium text-sm text-[#666666]">
-                What’s your credit score?
+                What’s your current credit score?
               </label>
               <input
                 type="text"
@@ -239,6 +309,34 @@ const WaitlistReactForm = () => {
                 onChange={onHandleChange}
               />
             </div>
+            <div className="flex flex-col gap-1 w-full">
+              <label className="font-body-medium text-sm text-[#666666]">
+                Do you have an existing mortgage?
+              </label>
+              <div className="flex items-center gap-5">
+                <label className="font-body-medium text-base flex gap-2">
+                  <input
+                    type="radio"
+                    name="existingMortgage"
+                    value="Yes"
+                    checked={data?.existingMortgage === "Yes"}
+                    onChange={onHandleChange}
+                  />
+                  Yes
+                </label>
+
+                <label className="font-body-medium text-base flex gap-2">
+                  <input
+                    type="radio"
+                    name="existingMortgage"
+                    value="No"
+                    checked={data?.existingMortgage === "No"}
+                    onChange={onHandleChange}
+                  />
+                  No
+                </label>
+              </div>
+            </div>
           </div>
 
           <div className="w-full mt-6">
@@ -247,7 +345,7 @@ const WaitlistReactForm = () => {
               className={`${isDisabled || loading ? "bg-slate-300" : "bg-main"} w-full py-4  rounded-lg text-white font-body-bold`}
               disabled={isDisabled || loading}
             >
-              {loading ? "Saving information..." : "Get started"}
+              {loading ? "Loading please wait ..." : "Kick off my application"}
             </button>
           </div>
         </>
