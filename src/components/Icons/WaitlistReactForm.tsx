@@ -247,7 +247,7 @@ const WaitlistReactForm = () => {
               className={`${isDisabled || loading ? "bg-slate-300" : "bg-main"} w-full py-4  rounded-lg text-white font-body-bold`}
               disabled={isDisabled || loading}
             >
-              {loading ? "Saving information..." : "Join our waitlist"}
+              {loading ? "Saving information..." : "Get started"}
             </button>
           </div>
         </>
