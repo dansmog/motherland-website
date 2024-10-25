@@ -281,7 +281,7 @@ const WaitlistReactForm = () => {
             </div>
             <div className="flex flex-col gap-1 w-full">
               <label className="font-body-medium text-sm text-[#666666]">
-                Available down payment
+                How much do you have as down payment?
               </label>
               <CurrencyFormat
                 thousandSeparator={true}

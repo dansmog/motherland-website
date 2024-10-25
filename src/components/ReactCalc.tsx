@@ -240,7 +240,7 @@ const ReactCalc = () => {
               thousandSeparator={true}
               prefix={"CA$"}
               displayType="text"
-              value={loan}
+              value={loan.toFixed(2)}
               name="amount"
             />
           </span>
