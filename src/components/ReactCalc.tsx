@@ -99,12 +99,6 @@ const ReactCalc = () => {
       const principal = loanAvailable - downPaymentResult;
       const numberOfPayments = parseFloat(data?.amortization) * MONTHS_IN_YEAR;
 
-      // const monthlyPayment =
-      //   (principal *
-      //     (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments))) /
-      //   (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
-
-      // Monthly payment calculation
       const monthlyPayment =
         (loanAvailable *
           (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments))) /

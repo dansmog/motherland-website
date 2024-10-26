@@ -4,13 +4,15 @@ import PartnershipReactForm from "./Icons/PartnershipReactForm";
 
 <div
   id="partnershipModal"
-  class="fixed inset-0 bg-black bg-opacity-50 z-40 items-center justify-center hidden"
+  class="fixed inset-0 bg-black bg-opacity-50 z-40 items-center justify-center"
+  style="display: none;"
 >
   <div
     class="bg-white relative p-5 rounded-lg h-4/5 md:h-auto w-[380px] md:w-[720px] overflow-scroll"
   >
     <button
       id="closeModal"
+      type="button"
       class="px-2 absolute cursor-pointer top-2 right-2 py-2 bg-gray-200 rounded hover:bg-gray-300"
     >
       <svg
@@ -39,37 +41,40 @@ import PartnershipReactForm from "./Icons/PartnershipReactForm";
 </div>
 
 <script>
-  const modal = document.getElementById(
-    "partnershipModal"
-  ) as HTMLDivElement | null;
-  const closeButton = document.getElementById(
-    "closeModal"
-  ) as HTMLButtonElement | null;
-  const watchDemoButtons = document.querySelectorAll<HTMLElement>(
-    "[data-join-partnership]"
-  );
+  document.addEventListener("DOMContentLoaded", () => {
+    const partnershipModal = document.getElementById("partnershipModal");
+    const closeButton = document.getElementById("closeModal");
+    const watchDemoButtons = document.querySelectorAll(
+      "[data-join-partnership]"
+    );
 
-  if (modal && closeButton) {
-    watchDemoButtons.forEach((button) => {
-      button.addEventListener("click", (e: Event) => {
-        e.preventDefault();
-        modal.classList.remove("hidden");
-        modal.style.display = "flex"; // Add this line
+    if (partnershipModal && closeButton) {
+      // Open modal
+      watchDemoButtons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+          e.preventDefault();
+          partnershipModal.style.display = "flex";
+        });
       });
-    });
 
-    closeButton.addEventListener("click", () => {
-      console.log("weoruaoeruaoru");
-      modal.classList.add("hidden");
-      modal.style.display = ""; // Add this line
-    });
+      // Close modal with button
+      closeButton.addEventListener("click", () => {
+        partnershipModal.style.display = "none";
+      });
 
-    // Similar change in the click outside listener
-    modal.addEventListener("click", (e: MouseEvent) => {
-      if (e.target === modal) {
-        modal.classList.add("hidden");
-        modal.style.display = ""; // Add this line
-      }
-    });
-  }
+      // Close modal when clicking outside
+      partnershipModal.addEventListener("click", (e) => {
+        if (e.target === partnershipModal) {
+          partnershipModal.style.display = "none";
+        }
+      });
+
+      // Close on escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && partnershipModal.style.display === "flex") {
+          partnershipModal.style.display = "none";
+        }
+      });
+    }
+  });
 </script>
