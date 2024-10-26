@@ -75,7 +75,9 @@ const PartnershipReactForm = () => {
     }
   };
 
-  let isEmailError = errors?.email.includes("Please enter a valid email");
+  console.log("email", errors?.email);
+  let isEmailError = errors?.email?.includes("Please enter a valid email");
+  console.log("hasError", isEmailError);
 
   const isDisabled =
     !data?.businessName.length ||
@@ -85,6 +87,8 @@ const PartnershipReactForm = () => {
     !data?.contactPersonRole.length ||
     !data?.message.length ||
     !data?.partnershipRole.length;
+
+  console.log({ isEmailError, isDisabled, loading });
 
   return (
     <section className="w-full">
