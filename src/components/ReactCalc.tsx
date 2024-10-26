@@ -24,6 +24,7 @@ const ReactCalc = () => {
   const PRIME_RATE = 7.2;
   const INTEREST_RATE = PRIME_RATE + 7.5;
   const MONTHS_IN_YEAR = 12;
+  const BIWEEKLY_PERIODS_IN_YEAR = 26;
 
   // Debounced function to update the actual state
   const debouncedSetData = debounce((name, value) => {
@@ -109,7 +110,18 @@ const ReactCalc = () => {
           (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments))) /
         (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
 
-      const biweeklyPayment = monthlyPayment / 2;
+      const biweeklyInterestRate =
+        Math.pow(1 + monthlyRate, MONTHS_IN_YEAR / BIWEEKLY_PERIODS_IN_YEAR) -
+        1;
+
+      const totalBiweeklyPayments =
+        parseFloat(data?.amortization) * BIWEEKLY_PERIODS_IN_YEAR;
+
+      const biweeklyPayment =
+        (loanAvailable *
+          (biweeklyInterestRate *
+            Math.pow(1 + biweeklyInterestRate, totalBiweeklyPayments))) /
+        (Math.pow(1 + biweeklyInterestRate, totalBiweeklyPayments) - 1);
 
       setPaybackAmount(
         data?.time === "monthly" ? monthlyPayment : biweeklyPayment
