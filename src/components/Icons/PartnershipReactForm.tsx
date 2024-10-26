@@ -8,6 +8,7 @@ const PartnershipReactForm = () => {
     contactPersonPhone: "",
     contactPersonRole: "",
     message: "",
+    partnershipRole: "⁠Developer",
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -53,7 +54,8 @@ const PartnershipReactForm = () => {
     !data?.contactPersonEmail.length ||
     !data?.contactPersonPhone.length ||
     !data?.contactPersonRole.length ||
-    !data?.message.length;
+    !data?.message.length ||
+    !data?.partnershipRole.length;
 
   return (
     <section className="w-full">
@@ -151,6 +153,21 @@ const PartnershipReactForm = () => {
                 onChange={onHandleChange}
               />
             </div>
+          </div>
+
+          <div className="flex flex-col gap-1 w-full mt-4">
+            <label className="font-body-medium text-sm text-[#666666]">
+              Partner with us as:
+            </label>
+            <select
+              name="maritalStatus"
+              onChange={onHandleChange}
+              className="w-full  border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
+            >
+              <option>⁠Developer</option>
+              <option>⁠Private Investor</option>
+              <option>⁠Corporate Lender</option>
+            </select>
           </div>
 
           <div className="flex flex-col md:flex-row gap-4 items-center mt-4">
