@@ -34,7 +34,7 @@ const ReactCalc = () => {
     });
 
     if (name === "downPayment") {
-      const numValue = parseFloat(value);
+      let numValue = parseFloat(value);
       if (numValue < 5) {
         setError((prev) => ({
           ...prev,
@@ -43,13 +43,10 @@ const ReactCalc = () => {
         return;
       }
       if (numValue > 90) {
-        setError((prev) => ({
-          ...prev,
-          downpaymentError: "Down payment cannot exceed 90%",
-        }));
-        return;
+        numValue = 90; // Remove the last digit if above 90
+        console.log({ numValue });
       }
-      setData((prev) => ({ ...prev, [name]: value }));
+      setData((prev) => ({ ...prev, downPayment: numValue.toString() }));
     } else if (name === "amortization") {
       const numValue = parseFloat(value);
       if (numValue < 5) {
@@ -68,25 +65,28 @@ const ReactCalc = () => {
       }
       setData((prev) => ({ ...prev, [name]: value }));
     }
-  }, 500); // 500ms delay
+  }, 250); // Faster debounce delay
 
   const onHandleChange = (event) => {
     const { name, value } = event.target;
 
     // Immediately update the input value for display
-    setInputValues((prev) => ({ ...prev, [name]: value }));
+    setData((prev) => ({ ...prev, [name]: value }));
 
     // Debounce the actual state update and validation
     debouncedSetData(name, value);
   };
 
   useEffect(() => {
+    console.log({ data });
     if (
       data?.amortization &&
       data?.propertyAmount &&
       data?.downPayment &&
       data?.time
     ) {
+      console.log("Data object:", data); // Debugging state values
+
       const downPaymentResult =
         (parseFloat(data?.downPayment) / 100) *
         parseFloat(data?.propertyAmount);
@@ -95,8 +95,6 @@ const ReactCalc = () => {
         parseFloat(data?.propertyAmount) - downPaymentResult;
 
       const monthlyRate = INTEREST_RATE / 100 / MONTHS_IN_YEAR;
-
-      const principal = loanAvailable - downPaymentResult;
       const numberOfPayments = parseFloat(data?.amortization) * MONTHS_IN_YEAR;
 
       const monthlyPayment =
@@ -107,7 +105,6 @@ const ReactCalc = () => {
       const biweeklyInterestRate =
         Math.pow(1 + monthlyRate, MONTHS_IN_YEAR / BIWEEKLY_PERIODS_IN_YEAR) -
         1;
-
       const totalBiweeklyPayments =
         parseFloat(data?.amortization) * BIWEEKLY_PERIODS_IN_YEAR;
 
@@ -121,6 +118,15 @@ const ReactCalc = () => {
         data?.time === "monthly" ? monthlyPayment : biweeklyPayment
       );
       setLoan(loanAvailable);
+
+      console.log({
+        downPaymentResult,
+        loanAvailable,
+        monthlyPayment,
+        biweeklyPayment,
+        paybackAmount:
+          data?.time === "monthly" ? monthlyPayment : biweeklyPayment,
+      });
     }
   }, [data]);
 
@@ -156,7 +162,7 @@ const ReactCalc = () => {
 
         <input
           onChange={onHandleChange}
-          value={inputValues.downPayment}
+          value={data?.downPayment}
           name="downPayment"
           type="number"
           min="5"
@@ -164,7 +170,7 @@ const ReactCalc = () => {
           className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
           placeholder="10"
         />
-        {data?.downPayment ? (
+        {data?.downPayment && data?.propertyAmount ? (
           <span className="font-body-bold text-xs text-black text-opacity-40">
             Down payment in CA$:{" "}
             <CurrencyFormat
@@ -185,33 +191,31 @@ const ReactCalc = () => {
           </span>
         )}
       </div>
-      <div className="">
-        <div className="flex flex-col md:flex-row gap-4 items-center">
-          <div className="flex flex-col gap-2 w-full">
-            <label className="font-body-medium text-sm">Interest rate</label>
-            <input
-              type="text"
-              disabled
-              className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
-              placeholder="10%"
-              value="Prime + 7.5%"
-            />
-          </div>
-          <div className="flex flex-col gap-2 w-full">
-            <label className="font-body-medium text-sm">
-              Amortization (5-15)
-            </label>
-            <input
-              min={5}
-              max={90}
-              type="number"
-              name="amortization"
-              value={inputValues.amortization}
-              className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
-              placeholder="8"
-              onChange={onHandleChange}
-            />
-          </div>
+      <div className="flex flex-col md:flex-row gap-4 items-center">
+        <div className="flex flex-col gap-2 w-full">
+          <label className="font-body-medium text-sm">Interest rate</label>
+          <input
+            type="text"
+            disabled
+            className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
+            placeholder="10%"
+            value="Prime + 7.5%"
+          />
+        </div>
+        <div className="flex flex-col gap-2 w-full">
+          <label className="font-body-medium text-sm">
+            Amortization (5-15)
+          </label>
+          <input
+            min={5}
+            max={90}
+            type="number"
+            name="amortization"
+            value={inputValues.amortization}
+            className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
+            placeholder="8"
+            onChange={onHandleChange}
+          />
         </div>
         {error.amortizationError && (
           <span className="text-red-500 text-sm font-body-medium">
@@ -241,33 +245,32 @@ const ReactCalc = () => {
       </div>
       <div className="flex flex-col md:flex-row md:items-center md:justify-between">
         <div className="flex flex-col gap-2 mt-5">
-          <span className="text-base font-body-medium">
-            Total Loan available
-          </span>
-          <span className="text-2xl font-body-bold text-main">
+          <span className="font-body-medium text-sm">Total loan amount</span>
+          {loan ? (
             <CurrencyFormat
               thousandSeparator={true}
               prefix={"CA$"}
               displayType="text"
               value={loan.toFixed(2)}
-              name="amount"
+              className="text-black text-opacity-70 font-body-bold text-2xl"
             />
-          </span>
+          ) : (
+            "Calculating..."
+          )}
         </div>
         <div className="flex flex-col gap-2 mt-5">
-          <span className="text-base font-body-medium">
-            Total amount to repay{" "}
-            {data?.time === "biweekly" ? "Bi-weekly" : data?.time}
-          </span>
-          <span className="text-2xl font-body-bold text-main">
+          <span className="font-body-medium text-sm">Payback amount</span>
+          {paybackAmount ? (
             <CurrencyFormat
               thousandSeparator={true}
               prefix={"CA$"}
               displayType="text"
               value={paybackAmount.toFixed(2)}
-              name="amount"
+              className="text-black text-opacity-70 font-body-bold text-2xl"
             />
-          </span>
+          ) : (
+            "Calculating..."
+          )}
         </div>
       </div>
     </form>
