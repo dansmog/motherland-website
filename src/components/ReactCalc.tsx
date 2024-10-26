@@ -159,6 +159,8 @@ const ReactCalc = () => {
           value={inputValues.downPayment}
           name="downPayment"
           type="number"
+          min="5"
+          max="90"
           className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
           placeholder="10"
         />
