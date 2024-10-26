@@ -1,4 +1,12 @@
 import { useState } from "react";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
+
+export const validateEmail = (email) => {
+  // Regular expression for validating an email
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return emailRegex.test(email);
+};
 
 const PartnershipReactForm = () => {
   const [data, setData] = useState({
@@ -12,19 +20,38 @@ const PartnershipReactForm = () => {
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [errors, setErrors] = useState({
+    email: "",
+    phone: "",
+  });
 
   //https://hooks.zapier.com/hooks/catch/4886427/2mi1ggt/
 
   const onHandleChange = (event) => {
     const { name, value } = event.target;
+
+    console.log({ name, value });
     setData({
       ...data,
       [name]: value,
     });
+
+    if (name === "contactPersonEmail") {
+      setErrors({
+        ...errors,
+        email: validateEmail(value) ? "" : "Please enter a valid email",
+      });
+    }
+  };
+
+  const onPhoneChange = (value) => {
+    setData({
+      ...data,
+      contactPersonPhone: value,
+    });
   };
 
   const onHandleSubmit = async () => {
-    console.log(data);
     setLoading(true);
     const payload = { ...data };
     try {
@@ -48,11 +75,13 @@ const PartnershipReactForm = () => {
     }
   };
 
+  let isEmailError = errors?.email.includes("Please enter a valid email");
+
   const isDisabled =
     !data?.businessName.length ||
     !data?.businessAddress.length ||
     !data?.contactPersonEmail.length ||
-    !data?.contactPersonPhone.length ||
+    !data?.contactPersonPhone?.length ||
     !data?.contactPersonRole.length ||
     !data?.message.length ||
     !data?.partnershipRole.length;
@@ -109,6 +138,7 @@ const PartnershipReactForm = () => {
                 name="businessAddress"
                 className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
                 placeholder="105 business address street"
+                required
                 onChange={onHandleChange}
               />
             </div>
@@ -120,24 +150,38 @@ const PartnershipReactForm = () => {
                 Contact person email?
               </label>
               <input
-                type="text"
+                type="email"
                 name="contactPersonEmail"
                 className="w-full  border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
                 placeholder="E.g Blessing Ebong"
+                required
                 onChange={onHandleChange}
               />
+
+              {errors.email && (
+                <span className="text-red-500 text-sm font-body-medium">
+                  {errors.email}
+                </span>
+              )}
             </div>
             <div className="flex flex-col gap-1 w-full">
               <label className="font-body-medium text-sm text-[#666666]">
                 Contact person phone number?
               </label>
-              <input
-                type="text"
+              <PhoneInput
                 name="contactPersonPhone"
                 className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
-                placeholder="+2347066560656"
-                onChange={onHandleChange}
+                placeholder="Enter phone number"
+                value={data?.contactPersonPhone}
+                onChange={onPhoneChange}
+                defaultCountry="CA"
+                countries={["CA", "GB", "US"]}
               />
+              {errors.phone && (
+                <span className="text-red-500 text-sm font-body-medium">
+                  {errors.phone}
+                </span>
+              )}
             </div>
           </div>
           <div className="flex flex-col md:flex-row gap-4 items-center mt-4">
@@ -190,7 +234,7 @@ const PartnershipReactForm = () => {
             <button
               onClick={onHandleSubmit}
               className={`${isDisabled || loading ? "bg-slate-300" : "bg-main"} w-full py-4  rounded-lg text-white font-body-bold`}
-              disabled={isDisabled || loading}
+              disabled={isDisabled || isEmailError || loading}
             >
               {loading ? "Saving information..." : "Become a partner"}
             </button>

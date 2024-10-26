@@ -1,5 +1,9 @@
 import { useState } from "react";
 import CurrencyFormat from "react-currency-format";
+import { validateEmail } from "./PartnershipReactForm";
+
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 
 const WaitlistReactForm = () => {
   const [data, setData] = useState({
@@ -20,7 +24,20 @@ const WaitlistReactForm = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
+  const [errors, setErrors] = useState({
+    email: "",
+    phone: "",
+  });
+
   //https://hooks.zapier.com/hooks/catch/4886427/2mi1ggt/
+
+  const onPhoneChange = (value) => {
+    console.log({ value });
+    setData({
+      ...data,
+      phone: value,
+    });
+  };
 
   const onHandleChange = (event) => {
     const { name, value } = event.target;
@@ -28,6 +45,13 @@ const WaitlistReactForm = () => {
       ...data,
       [name]: value,
     });
+
+    if (name === "email") {
+      setErrors({
+        ...errors,
+        email: validateEmail(value) ? "" : "Please enter a valid email",
+      });
+    }
   };
 
   const onHandleSubmit = async () => {
@@ -52,6 +76,9 @@ const WaitlistReactForm = () => {
       console.error(error.message);
     }
   };
+
+  let isEmailError = errors?.email?.includes("Please enter a valid email");
+  console.log({ isEmailError });
 
   const isDisabled =
     !data?.location.length ||
@@ -125,6 +152,11 @@ const WaitlistReactForm = () => {
                 placeholder="johndoe@gmail.com"
                 onChange={onHandleChange}
               />
+              {errors.email && (
+                <span className="text-red-500 text-sm font-body-medium">
+                  {errors.email}
+                </span>
+              )}
             </div>
           </div>
 
@@ -179,13 +211,20 @@ const WaitlistReactForm = () => {
               <label className="font-body-medium text-sm text-[#666666]">
                 What's your phone number?
               </label>
-              <input
-                type="text"
+              <PhoneInput
                 name="phone"
                 className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
-                placeholder="e.g +1(647) 234-5678"
-                onChange={onHandleChange}
+                placeholder="Enter phone number"
+                value={data?.phone}
+                onChange={onPhoneChange}
+                defaultCountry="CA"
+                countries={["CA", "GB", "US"]}
               />
+              {errors.phone && (
+                <span className="text-red-500 text-sm font-body-medium">
+                  {errors.phone}
+                </span>
+              )}
             </div>
             <div className="flex flex-col gap-1 w-full">
               <label className="font-body-medium text-sm text-[#666666]">
@@ -343,7 +382,7 @@ const WaitlistReactForm = () => {
             <button
               onClick={onHandleSubmit}
               className={`${isDisabled || loading ? "bg-slate-300" : "bg-main"} w-full py-4  rounded-lg text-white font-body-bold`}
-              disabled={isDisabled || loading}
+              disabled={isDisabled || isEmailError || loading}
             >
               {loading ? "Loading please wait ..." : "Kick off my application"}
             </button>
