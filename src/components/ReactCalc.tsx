@@ -44,11 +44,10 @@ const ReactCalc = () => {
       }
       if (numValue > 90) {
         numValue = 90; // Remove the last digit if above 90
-        console.log({ numValue });
       }
       setData((prev) => ({ ...prev, downPayment: numValue.toString() }));
     } else if (name === "amortization") {
-      const numValue = parseFloat(value);
+      let numValue = parseFloat(value);
       if (numValue < 5) {
         setError((prev) => ({
           ...prev,
@@ -56,14 +55,14 @@ const ReactCalc = () => {
         }));
         return;
       }
-      if (numValue > 90) {
+      if (numValue > 15) {
+        numValue = 15;
         setError((prev) => ({
           ...prev,
           amortizationError: "Your amortization cannot exceed 90",
         }));
-        return;
       }
-      setData((prev) => ({ ...prev, [name]: value }));
+      setData((prev) => ({ ...prev, [name]: numValue }));
     }
   }, 250); // Faster debounce delay
 
@@ -78,15 +77,12 @@ const ReactCalc = () => {
   };
 
   useEffect(() => {
-    console.log({ data });
     if (
       data?.amortization &&
       data?.propertyAmount &&
       data?.downPayment &&
       data?.time
     ) {
-      console.log("Data object:", data); // Debugging state values
-
       const downPaymentResult =
         (parseFloat(data?.downPayment) / 100) *
         parseFloat(data?.propertyAmount);
@@ -114,19 +110,14 @@ const ReactCalc = () => {
             Math.pow(1 + biweeklyInterestRate, totalBiweeklyPayments))) /
         (Math.pow(1 + biweeklyInterestRate, totalBiweeklyPayments) - 1);
 
-      setPaybackAmount(
-        data?.time === "monthly" ? monthlyPayment : biweeklyPayment
-      );
-      setLoan(loanAvailable);
-
-      console.log({
-        downPaymentResult,
-        loanAvailable,
-        monthlyPayment,
-        biweeklyPayment,
-        paybackAmount:
-          data?.time === "monthly" ? monthlyPayment : biweeklyPayment,
-      });
+      if (error?.downpaymentError || error?.amortizationError) {
+        return;
+      } else {
+        setPaybackAmount(
+          data?.time === "monthly" ? monthlyPayment : biweeklyPayment
+        );
+        setLoan(loanAvailable);
+      }
     }
   }, [data]);
 
@@ -211,17 +202,17 @@ const ReactCalc = () => {
             max={90}
             type="number"
             name="amortization"
-            value={inputValues.amortization}
+            value={data?.amortization}
             className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
             placeholder="8"
             onChange={onHandleChange}
           />
+          {error.amortizationError && (
+            <span className="text-red-500 text-sm font-body-medium">
+              {error.amortizationError}
+            </span>
+          )}
         </div>
-        {error.amortizationError && (
-          <span className="text-red-500 text-sm font-body-medium">
-            {error.amortizationError}
-          </span>
-        )}
       </div>
 
       <div className="flex flex-col w-full">

@@ -32,7 +32,6 @@ const WaitlistReactForm = () => {
   //https://hooks.zapier.com/hooks/catch/4886427/2mi1ggt/
 
   const onPhoneChange = (value) => {
-    console.log({ value });
     setData({
       ...data,
       phone: value,
@@ -78,7 +77,6 @@ const WaitlistReactForm = () => {
   };
 
   let isEmailError = errors?.email?.includes("Please enter a valid email");
-  console.log({ isEmailError });
 
   const isDisabled =
     !data?.location.length ||

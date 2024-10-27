@@ -29,8 +29,6 @@ const PartnershipReactForm = () => {
 
   const onHandleChange = (event) => {
     const { name, value } = event.target;
-
-    console.log({ name, value });
     setData({
       ...data,
       [name]: value,
@@ -67,17 +65,13 @@ const PartnershipReactForm = () => {
       }
       setLoading(false);
       setSuccess(true);
-      console.log(response.json());
     } catch (error) {
       setLoading(false);
       window.alert("Failed to join, please try again");
-      console.error(error.message);
     }
   };
 
-  console.log("email", errors?.email);
   let isEmailError = errors?.email?.includes("Please enter a valid email");
-  console.log("hasError", isEmailError);
 
   const isDisabled =
     !data?.businessName.length ||
@@ -87,8 +81,6 @@ const PartnershipReactForm = () => {
     !data?.contactPersonRole.length ||
     !data?.message.length ||
     !data?.partnershipRole.length;
-
-  console.log({ isEmailError, isDisabled, loading });
 
   return (
     <section className="w-full">
@@ -208,7 +200,7 @@ const PartnershipReactForm = () => {
               Partner with us as:
             </label>
             <select
-              name="maritalStatus"
+              name="partnershipRole"
               onChange={onHandleChange}
               className="w-full  border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
             >
