@@ -29,8 +29,6 @@ const WaitlistReactForm = () => {
     phone: "",
   });
 
-  //https://hooks.zapier.com/hooks/catch/4886427/2mi1ggt/
-
   const onPhoneChange = (value) => {
     setData({
       ...data,

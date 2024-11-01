@@ -25,8 +25,6 @@ const PartnershipReactForm = () => {
     phone: "",
   });
 
-  //https://hooks.zapier.com/hooks/catch/4886427/2mi1ggt/
-
   const onHandleChange = (event) => {
     const { name, value } = event.target;
     setData({
