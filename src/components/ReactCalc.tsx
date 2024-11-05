@@ -20,7 +20,7 @@ const ReactCalc = () => {
     downPayment: "",
     amortization: "",
   });
-  const [country, selectedCountry] = useState("");
+  const [country, setCountry] = useState("");
 
   const PRIME_RATE = 7.2;
   const INTEREST_RATE = PRIME_RATE + 7.5;
@@ -129,6 +129,10 @@ const ReactCalc = () => {
     };
   }, []);
 
+  const onHandleCountryChange = (event) => {
+    setCountry(event?.target.value);
+  };
+
   return (
     <form className="w-full flex flex-col gap-4">
       <div className="flex flex-col gap-1 w-full">
@@ -137,7 +141,7 @@ const ReactCalc = () => {
         </label>
         <select
           name="countryOfResidence"
-          onChange={onHandleChange}
+          onChange={onHandleCountryChange}
           className="w-full  border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
         >
           <option>Canada</option>
