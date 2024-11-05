@@ -159,7 +159,7 @@ const WaitlistReactForm = () => {
           <div className="flex flex-col md:flex-row gap-4 items-center mt-4">
             <div className="flex flex-col gap-1 w-full">
               <label className="font-body-medium text-sm text-[#666666]">
-                Do you currently have a job?
+                Are you currently employed?
               </label>
               <div className="flex items-center gap-5">
                 <label className="font-body-medium text-base flex gap-2">

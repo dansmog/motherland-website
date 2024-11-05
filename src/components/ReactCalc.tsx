@@ -20,6 +20,7 @@ const ReactCalc = () => {
     downPayment: "",
     amortization: "",
   });
+  const [country, selectedCountry] = useState("");
 
   const PRIME_RATE = 7.2;
   const INTEREST_RATE = PRIME_RATE + 7.5;
@@ -130,6 +131,21 @@ const ReactCalc = () => {
 
   return (
     <form className="w-full flex flex-col gap-4">
+      <div className="flex flex-col gap-1 w-full">
+        <label className="font-body-medium text-sm text-[#666666]">
+          Country of Residence?
+        </label>
+        <select
+          name="countryOfResidence"
+          onChange={onHandleChange}
+          className="w-full  border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
+        >
+          <option>Canada</option>
+          <option disabled>United states</option>
+          <option disabled>United Kingdom</option>
+          <option disabled>Europe</option>
+        </select>
+      </div>
       <div className="flex flex-col gap-2">
         <label className="font-body-medium text-sm">
           How much is the property you want to purchase?
