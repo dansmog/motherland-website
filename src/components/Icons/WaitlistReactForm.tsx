@@ -261,7 +261,7 @@ const WaitlistReactForm = () => {
                 type="text"
                 name="durationInCountry"
                 className="w-full  border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
-                placeholder="Please enter this is years"
+                placeholder="Please enter number of years"
                 onChange={onHandleChange}
               />
             </div>
@@ -340,7 +340,7 @@ const WaitlistReactForm = () => {
                 type="text"
                 name="creditScore"
                 className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
-                placeholder="e.g 56.88"
+                placeholder="e.g 715"
                 onChange={onHandleChange}
               />
             </div>
