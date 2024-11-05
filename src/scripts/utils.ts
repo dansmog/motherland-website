@@ -13,3 +13,8 @@ export function getCurrencySymbol(country) {
       return "CA$"; // Default to $ if country not found
   }
 }
+
+export const PrimeByCountry = {
+  canada: import.meta.env.PUBLIC_CANADA_PRIME,
+  "united states": import.meta.env.PUBLIC_UNITED_STATES_PRIME,
+};

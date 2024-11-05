@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CurrencyFormat from "react-currency-format";
 import { debounce } from "lodash";
-import { getCurrencySymbol } from "../scripts/utils";
+import { getCurrencySymbol, PrimeByCountry } from "../scripts/utils";
 
 const ReactCalc = () => {
   const [data, setData] = useState({
@@ -23,7 +23,7 @@ const ReactCalc = () => {
   });
   const [country, setCountry] = useState("canada");
 
-  const PRIME_RATE = 7.2;
+  const PRIME_RATE = Number(PrimeByCountry[country.toLowerCase()]);
   const INTEREST_RATE = PRIME_RATE + 7.5;
   const MONTHS_IN_YEAR = 12;
   const BIWEEKLY_PERIODS_IN_YEAR = 26;
@@ -147,7 +147,7 @@ const ReactCalc = () => {
           defaultValue={country}
         >
           <option>Canada</option>
-          <option disabled>United states</option>
+          <option>United states</option>
           <option disabled>United Kingdom</option>
           <option disabled>Europe</option>
         </select>
@@ -210,9 +210,9 @@ const ReactCalc = () => {
           <input
             type="text"
             disabled
-            className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
+            className="w-full border-[1px] border-[#F3F3F3] py-3 px-5 rounded-lg text-sm font-body-medium"
             placeholder="10%"
-            value="Prime + 7.5%"
+            value={`Prime (${Number(PrimeByCountry[country.toLowerCase()])}) + 7.5%`}
           />
         </div>
         <div className="flex flex-col gap-2 w-full">
