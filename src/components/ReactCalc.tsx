@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import CurrencyFormat from "react-currency-format";
 import { debounce } from "lodash";
+import { getCurrencySymbol } from "../scripts/utils";
 
 const ReactCalc = () => {
   const [data, setData] = useState({
@@ -20,7 +21,7 @@ const ReactCalc = () => {
     downPayment: "",
     amortization: "",
   });
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState("canada");
 
   const PRIME_RATE = 7.2;
   const INTEREST_RATE = PRIME_RATE + 7.5;
@@ -143,6 +144,7 @@ const ReactCalc = () => {
           name="countryOfResidence"
           onChange={onHandleCountryChange}
           className="w-full  border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
+          defaultValue={country}
         >
           <option>Canada</option>
           <option disabled>United states</option>
@@ -157,13 +159,13 @@ const ReactCalc = () => {
 
         <CurrencyFormat
           thousandSeparator={true}
-          prefix={"CA$"}
+          prefix={getCurrencySymbol(country)}
           onValueChange={(values) => {
             setData((prev) => ({ ...prev, propertyAmount: values?.value }));
           }}
           name="propertyAmount"
           className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
-          placeholder="50,000 CAD"
+          placeholder={`50,000 ${getCurrencySymbol(country)}`}
         />
       </div>
       <div className="flex flex-col gap-2">
@@ -183,10 +185,10 @@ const ReactCalc = () => {
         />
         {data?.downPayment && data?.propertyAmount ? (
           <span className="font-body-bold text-xs text-black text-opacity-40">
-            Down payment in CA$:{" "}
+            {`Down payment in ${getCurrencySymbol(country)}`}
             <CurrencyFormat
               thousandSeparator={true}
-              prefix={"CA$"}
+              prefix={getCurrencySymbol(country)}
               displayType="text"
               value={(
                 (parseFloat(data?.downPayment) / 100) *
@@ -260,7 +262,7 @@ const ReactCalc = () => {
           {loan ? (
             <CurrencyFormat
               thousandSeparator={true}
-              prefix={"CA$"}
+              prefix={getCurrencySymbol(country)}
               displayType="text"
               value={loan.toFixed(2)}
               className="text-black text-opacity-70 font-body-bold text-2xl"
@@ -274,7 +276,7 @@ const ReactCalc = () => {
           {paybackAmount ? (
             <CurrencyFormat
               thousandSeparator={true}
-              prefix={"CA$"}
+              prefix={getCurrencySymbol(country)}
               displayType="text"
               value={paybackAmount.toFixed(2)}
               className="text-black text-opacity-70 font-body-bold text-2xl"
