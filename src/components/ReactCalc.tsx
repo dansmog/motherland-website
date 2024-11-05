@@ -147,7 +147,7 @@ const ReactCalc = () => {
           defaultValue={country}
         >
           <option>Canada</option>
-          <option>United states</option>
+          <option disabled>United states</option>
           <option disabled>United Kingdom</option>
           <option disabled>Europe</option>
         </select>
