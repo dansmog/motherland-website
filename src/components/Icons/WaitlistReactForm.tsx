@@ -4,6 +4,7 @@ import { validateEmail } from "./PartnershipReactForm";
 
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
+import { getCurrencySymbol } from "../../scripts/utils";
 
 const WaitlistReactForm = () => {
   const [data, setData] = useState({
@@ -305,13 +306,13 @@ const WaitlistReactForm = () => {
               </label>
               <CurrencyFormat
                 thousandSeparator={true}
-                prefix={"CA$"}
+                prefix={getCurrencySymbol(data?.countryOfResidence)}
                 onValueChange={(values) => {
                   setData({ ...data, budget: values?.value });
                 }}
                 name="budget"
                 className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
-                placeholder="50,000 CAD"
+                placeholder={`50,000 ${getCurrencySymbol(data?.countryOfResidence)}`}
               />
             </div>
             <div className="flex flex-col gap-1 w-full">
@@ -320,13 +321,13 @@ const WaitlistReactForm = () => {
               </label>
               <CurrencyFormat
                 thousandSeparator={true}
-                prefix={"CA$"}
+                prefix={getCurrencySymbol(data?.countryOfResidence)}
                 onValueChange={(values) => {
                   setData({ ...data, downPayment: values?.value });
                 }}
                 name="amount"
                 className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
-                placeholder="50,000 CAD"
+                placeholder={`50,000 ${getCurrencySymbol(data?.countryOfResidence)}`}
               />
             </div>
           </div>
