@@ -134,6 +134,7 @@ const ReactCalc = () => {
     setCountry(event?.target.value);
   };
 
+  console.log(parseFloat(data?.propertyAmount) > 50000);
   return (
     <form className="w-full flex flex-col gap-4">
       <div className="flex flex-col gap-1 w-full">
@@ -183,7 +184,9 @@ const ReactCalc = () => {
           className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
           placeholder="10"
         />
-        {data?.downPayment && data?.propertyAmount ? (
+        {parseFloat(data?.downPayment) >= 10 &&
+        data?.downPayment &&
+        data?.propertyAmount ? (
           <span className="font-body-bold text-xs text-black text-opacity-40">
             {`Down payment in ${getCurrencySymbol(country)}`}
             <CurrencyFormat
@@ -203,6 +206,13 @@ const ReactCalc = () => {
             {error.downpaymentError}
           </span>
         )}
+
+        {parseFloat(data?.propertyAmount) > 50000 &&
+          parseFloat(data?.downPayment) < 10 && (
+            <span className="text-red-500 text-sm font-body-medium">
+              Property value &gt; 50k requires minimum of 10%
+            </span>
+          )}
       </div>
       <div className="flex flex-col md:flex-row gap-4 items-center">
         <div className="flex flex-col gap-2 w-full">
