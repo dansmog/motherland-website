@@ -155,7 +155,7 @@ const ReactCalc = () => {
       </div>
       <div className="flex flex-col gap-2">
         <label className="font-body-medium text-sm">
-          How much is the property you want to purchase? (10k-50k)
+          How much is the property you want to purchase? (10k-150k)
         </label>
 
         <CurrencyFormat
@@ -168,7 +168,14 @@ const ReactCalc = () => {
           className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
           placeholder={`50,000 ${getCurrencySymbol(country)}`}
         />
+        {parseFloat(data?.propertyAmount) > 150000 ||
+        parseFloat(data?.propertyAmount) < 1000 ? (
+          <span className="text-red-500 text-sm font-body-medium">
+            You can only enter property value between 10k - 150k
+          </span>
+        ) : null}
       </div>
+
       <div className="flex flex-col gap-2">
         <label className="font-body-medium text-sm">
           How much down payment in %? (5-90)
@@ -269,12 +276,15 @@ const ReactCalc = () => {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between">
         <div className="flex flex-col gap-2 mt-5">
           <span className="font-body-medium text-sm">Total loan amount</span>
-          {(loan &&
-            parseFloat(data?.propertyAmount) > 50000 &&
+          {loan &&
+          !(
+            parseFloat(data?.propertyAmount) > 150000 ||
+            parseFloat(data?.propertyAmount) < 1000
+          ) &&
+          ((parseFloat(data?.propertyAmount) > 50000 &&
             parseFloat(data?.downPayment) >= 10) ||
-          (loan &&
-            parseFloat(data?.propertyAmount) < 50000 &&
-            parseFloat(data?.downPayment) >= 5) ? (
+            (parseFloat(data?.propertyAmount) < 50000 &&
+              parseFloat(data?.downPayment) >= 5)) ? (
             <CurrencyFormat
               thousandSeparator={true}
               prefix={getCurrencySymbol(country)}
@@ -288,12 +298,15 @@ const ReactCalc = () => {
         </div>
         <div className="flex flex-col gap-2 mt-5">
           <span className="font-body-medium text-sm">Payback amount</span>
-          {(paybackAmount &&
-            parseFloat(data?.propertyAmount) > 50000 &&
+          {paybackAmount &&
+          !(
+            parseFloat(data?.propertyAmount) > 150000 ||
+            parseFloat(data?.propertyAmount) < 1000
+          ) &&
+          ((parseFloat(data?.propertyAmount) > 50000 &&
             parseFloat(data?.downPayment) >= 10) ||
-          (loan &&
-            parseFloat(data?.propertyAmount) < 50000 &&
-            parseFloat(data?.downPayment) >= 5) ? (
+            (parseFloat(data?.propertyAmount) < 50000 &&
+              parseFloat(data?.downPayment) >= 5)) ? (
             <CurrencyFormat
               thousandSeparator={true}
               prefix={getCurrencySymbol(country)}
