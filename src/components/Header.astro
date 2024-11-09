@@ -19,10 +19,10 @@ const { navList, bg, currentPath } = Astro.props;
   let menuIcon = document.querySelector("#menuIcon");
   const layer = document.querySelector("#navLayer");
   const closeIcon = document.querySelector("#closeIcon");
+  const mobileGetStartedBtn = layer!.querySelector("[data-join-waitlist]");
 
   function toggleNavLinks() {
     if (isToggled) {
-      // navlinks.classList.add("!visible");
       navlinks?.classList.add("!visible");
       menuIcon!.classList.add("toggled");
       layer!.classList.add("origin-top", "scale-y-100");
@@ -55,6 +55,12 @@ const { navList, bg, currentPath } = Astro.props;
       isToggled = false;
       toggleNavLinks();
     });
+  });
+
+  // Add event listener for mobile Get Started button
+  mobileGetStartedBtn?.addEventListener("click", () => {
+    isToggled = false;
+    toggleNavLinks();
   });
 </script>
 
