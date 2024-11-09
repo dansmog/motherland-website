@@ -269,7 +269,12 @@ const ReactCalc = () => {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between">
         <div className="flex flex-col gap-2 mt-5">
           <span className="font-body-medium text-sm">Total loan amount</span>
-          {loan ? (
+          {(loan &&
+            parseFloat(data?.propertyAmount) > 50000 &&
+            parseFloat(data?.downPayment) >= 10) ||
+          (loan &&
+            parseFloat(data?.propertyAmount) < 50000 &&
+            parseFloat(data?.downPayment) >= 5) ? (
             <CurrencyFormat
               thousandSeparator={true}
               prefix={getCurrencySymbol(country)}
@@ -283,7 +288,12 @@ const ReactCalc = () => {
         </div>
         <div className="flex flex-col gap-2 mt-5">
           <span className="font-body-medium text-sm">Payback amount</span>
-          {paybackAmount ? (
+          {(paybackAmount &&
+            parseFloat(data?.propertyAmount) > 50000 &&
+            parseFloat(data?.downPayment) >= 10) ||
+          (loan &&
+            parseFloat(data?.propertyAmount) < 50000 &&
+            parseFloat(data?.downPayment) >= 5) ? (
             <CurrencyFormat
               thousandSeparator={true}
               prefix={getCurrencySymbol(country)}
