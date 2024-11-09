@@ -283,6 +283,11 @@ const WaitlistReactForm = () => {
                 <option>Uyo</option>
                 <option>Port-Harcourt</option>
                 <option>Enugu</option>
+                <option>Nairobi</option>
+                <option>Accra</option>
+                <option>Addis Ababa</option>
+                <option>Cairo</option>
+                <option>Pretoria</option>
               </select>
             </div>
             <div className="flex flex-col gap-1 w-full">
