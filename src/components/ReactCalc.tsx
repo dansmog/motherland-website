@@ -61,7 +61,7 @@ const ReactCalc = () => {
         numValue = 15;
         setError((prev) => ({
           ...prev,
-          amortizationError: "Your amortization cannot exceed 90",
+          amortizationError: "Your amortization cannot exceed 15",
         }));
       }
       setData((prev) => ({ ...prev, [name]: numValue }));
@@ -92,8 +92,21 @@ const ReactCalc = () => {
       const loanAvailable =
         parseFloat(data?.propertyAmount) - downPaymentResult;
 
-      const monthlyRate = INTEREST_RATE / 100 / MONTHS_IN_YEAR;
+      const monthlyRate = parseFloat(INTEREST_RATE) / 100 / MONTHS_IN_YEAR;
       const numberOfPayments = parseFloat(data?.amortization) * MONTHS_IN_YEAR;
+
+      if (
+        isNaN(monthlyRate) ||
+        isNaN(numberOfPayments) ||
+        isNaN(loanAvailable)
+      ) {
+        console.error("Invalid values found:", {
+          monthlyRate,
+          numberOfPayments,
+          loanAvailable,
+        });
+        return;
+      }
 
       const monthlyPayment =
         (loanAvailable *
@@ -103,6 +116,14 @@ const ReactCalc = () => {
       const biweeklyInterestRate =
         Math.pow(1 + monthlyRate, MONTHS_IN_YEAR / BIWEEKLY_PERIODS_IN_YEAR) -
         1;
+
+      if (isNaN(biweeklyInterestRate)) {
+        console.error("Invalid biweekly interest rate:", {
+          biweeklyInterestRate,
+        });
+        return;
+      }
+
       const totalBiweeklyPayments =
         parseFloat(data?.amortization) * BIWEEKLY_PERIODS_IN_YEAR;
 
@@ -112,9 +133,18 @@ const ReactCalc = () => {
             Math.pow(1 + biweeklyInterestRate, totalBiweeklyPayments))) /
         (Math.pow(1 + biweeklyInterestRate, totalBiweeklyPayments) - 1);
 
+      if (isNaN(monthlyPayment) || isNaN(biweeklyPayment)) {
+        console.error("Invalid payment calculation:", {
+          monthlyPayment,
+          biweeklyPayment,
+        });
+        return;
+      }
+
       if (error?.downpaymentError || error?.amortizationError) {
         return;
       } else {
+        console.log({ monthlyPayment, biweeklyPayment });
         setPaybackAmount(
           data?.time === "monthly" ? monthlyPayment : biweeklyPayment
         );
@@ -133,6 +163,8 @@ const ReactCalc = () => {
   const onHandleCountryChange = (event) => {
     setCountry(event?.target.value);
   };
+
+  console.log(paybackAmount);
 
   return (
     <form className="w-full flex flex-col gap-4">
@@ -194,7 +226,7 @@ const ReactCalc = () => {
         data?.downPayment &&
         data?.propertyAmount ? (
           <span className="font-body-bold text-xs text-black text-opacity-40">
-            {`Down payment in ${getCurrencySymbol(country)}`}
+            {`Down payment in `}
             <CurrencyFormat
               thousandSeparator={true}
               prefix={getCurrencySymbol(country)}
@@ -276,14 +308,10 @@ const ReactCalc = () => {
         <div className="flex flex-col gap-2 mt-5">
           <span className="font-body-medium text-sm">Total loan amount</span>
           {loan &&
-          !(
-            parseFloat(data?.propertyAmount) > 150000 ||
-            parseFloat(data?.propertyAmount) < 1000
-          ) &&
-          ((parseFloat(data?.propertyAmount) > 50000 &&
-            parseFloat(data?.downPayment) >= 10) ||
-            (parseFloat(data?.propertyAmount) < 50000 &&
-              parseFloat(data?.downPayment) >= 5)) ? (
+          parseFloat(data?.propertyAmount) <= 150000 &&
+          parseFloat(data?.propertyAmount) >= 10000 &&
+          parseFloat(data?.downPayment) >= 5 &&
+          parseFloat(data?.downPayment) <= 90 ? (
             <CurrencyFormat
               thousandSeparator={true}
               prefix={getCurrencySymbol(country)}
@@ -298,14 +326,10 @@ const ReactCalc = () => {
         <div className="flex flex-col gap-2 mt-5">
           <span className="font-body-medium text-sm">Payback amount</span>
           {paybackAmount &&
-          !(
-            parseFloat(data?.propertyAmount) > 150000 ||
-            parseFloat(data?.propertyAmount) < 1000
-          ) &&
-          ((parseFloat(data?.propertyAmount) > 50000 &&
-            parseFloat(data?.downPayment) >= 10) ||
-            (parseFloat(data?.propertyAmount) < 50000 &&
-              parseFloat(data?.downPayment) >= 5)) ? (
+          parseFloat(data?.propertyAmount) <= 150000 &&
+          parseFloat(data?.propertyAmount) >= 10000 &&
+          parseFloat(data?.amortization) >= 5 &&
+          parseFloat(data?.amortization) <= 90 ? (
             <CurrencyFormat
               thousandSeparator={true}
               prefix={getCurrencySymbol(country)}
