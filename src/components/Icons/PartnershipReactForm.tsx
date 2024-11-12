@@ -101,11 +101,11 @@ const PartnershipReactForm = () => {
             </svg>
           </span>
           <h1 className="font-body-bold text-xl mt-5 text-center">
-            Thank You for showing interest in becoming a partner!
+            We do more together.
           </h1>
           <p className="text-base font-body-medium mt-4 text-center">
-            We're thrilled to have you on board! 🎉 Thank you for joining our
-            list of partners and showing interest in what we are building.
+            Thank you for indicating interest to partner with us as a/an . Our
+            team will connect with you on next steps.
           </p>
         </div>
       ) : (

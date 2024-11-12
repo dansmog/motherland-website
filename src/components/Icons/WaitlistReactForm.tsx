@@ -114,13 +114,11 @@ const WaitlistReactForm = () => {
             </svg>
           </span>
           <h1 className="font-body-bold text-xl mt-5 text-center">
-            Thank You for Joining Our Waitlist!
+            We are thrilled to have you on board
           </h1>
           <p className="text-base font-body-medium mt-4 text-center">
-            We're thrilled to have you on board! 🎉 Thank you for joining our
-            waitlist and showing interest in what we have to offer. Your
-            enthusiasm means the world to us, and we can't wait to share our
-            exciting products/services with you.
+            Your application is under review and our team will reach out to you
+            for further details and next steps.
           </p>
         </div>
       ) : (
@@ -292,7 +290,7 @@ const WaitlistReactForm = () => {
             </div>
             <div className="flex flex-col gap-1 w-full">
               <label className="font-body-medium text-sm text-[#666666]">
-                What is the timeline for purchasing the property?
+                When are you looking to purchase the property?
               </label>
               <input
                 type="date"

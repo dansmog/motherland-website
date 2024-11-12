@@ -65,36 +65,15 @@ const { title } = Astro.props;
     />
 
     <script>
-      // var scrollLinks = document.querySelectorAll('a[href^="#"]');
-      // var scrollOffset = 0;
-
       import { initializeNavigation } from "../scripts/smoothscroller";
-
-      // scrollLinks.forEach((anchor) => {
-      //   anchor.addEventListener("click", function (e) {
-      //     e.preventDefault();
-      //     /**@ts-ignore */
-      //     var target = document.querySelector(this.getAttribute("href"));
-      //     if (target) {
-      //       var targetOffset =
-      //         target.getBoundingClientRect().top +
-      //         window.pageYOffset -
-      //         scrollOffset;
-      //       window.scrollTo({
-      //         top: targetOffset,
-      //         behavior: "smooth",
-      //       });
-      //       target.setAttribute("tabindex", "-1");
-      //       target.focus();
-      //     }
-      //   });
-      // });
-
       // Initialize when DOM is ready
       document.addEventListener("DOMContentLoaded", () => {
         initializeNavigation();
       });
     </script>
+    <script
+      src="https://www.google.com/recaptcha/enterprise.js/render=6Ldzs3oqAAAAANsCmImmWWN9XgRNPyGOKag8yhAk"
+    ></script>
   </head>
   <body>
     <slot />
