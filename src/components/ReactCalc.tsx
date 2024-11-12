@@ -134,7 +134,6 @@ const ReactCalc = () => {
     setCountry(event?.target.value);
   };
 
-  console.log(parseFloat(data?.propertyAmount) > 50000);
   return (
     <form className="w-full flex flex-col gap-4">
       <div className="flex flex-col gap-1 w-full">
@@ -169,7 +168,7 @@ const ReactCalc = () => {
           placeholder={`50,000 ${getCurrencySymbol(country)}`}
         />
         {parseFloat(data?.propertyAmount) > 150000 ||
-        parseFloat(data?.propertyAmount) < 1000 ? (
+        parseFloat(data?.propertyAmount) < 10000 ? (
           <span className="text-red-500 text-sm font-body-medium">
             You can only enter property value between 10k - 150k
           </span>
