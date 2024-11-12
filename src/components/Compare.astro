@@ -104,7 +104,18 @@ import ThemeWrapper from "./ThemeWrapper.astro";
             >
               <img src="./images/check.svg" />
             </span>
-            <span class="flex-1"> You get an interest rate of up to 14% </span>
+            <span class="flex-1">
+              You get an interest rate of up to {
+                (() => {
+                  const primeRate =
+                    parseFloat(import.meta.env.PUBLIC_CANADA_PRIME) || 0;
+                  const motherlandRate =
+                    parseFloat(import.meta.env.PUBLIC_MOTHERLAND_RATE) || 0;
+                  const totalRate = (primeRate + motherlandRate).toFixed(2);
+                  return `${totalRate}`;
+                })()
+              }%
+            </span>
           </div>
         </div>
         <div class="flex flex-col gap-4 mt-5">
