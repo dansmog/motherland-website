@@ -4,32 +4,31 @@ import PartnershipReactForm from "./Icons/PartnershipReactForm";
 
 <div
   id="partnershipModal"
-  class="fixed inset-0 bg-black bg-opacity-50 z-40 items-center justify-center"
-  style="display: none;"
+  class="fixed inset-0 bg-black bg-opacity-50 z-40 items-center justify-center hidden"
 >
+  <button
+    id="closeModalPartnership"
+    type="button"
+    class="px-2 absolute cursor-pointer top-2 right-2 md:right-20 lg:right-40 xl:right-80 py-2 bg-gray-200 rounded hover:bg-gray-300"
+  >
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.758 17.243L12.001 12L17.244 17.243M17.244 6.75696L12 12L6.758 6.75696"
+        stroke="black"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </svg>
+  </button>
   <div
     class="bg-white relative p-5 rounded-lg h-4/5 md:h-auto w-[380px] md:w-[720px] overflow-scroll"
   >
-    <button
-      id="closeModal"
-      type="button"
-      class="px-2 absolute cursor-pointer top-2 right-2 py-2 bg-gray-200 rounded hover:bg-gray-300"
-    >
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M6.758 17.243L12.001 12L17.244 17.243M17.244 6.75696L12 12L6.758 6.75696"
-          stroke="black"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"></path>
-      </svg>
-    </button>
     <div class="relative">
       <h1 class="text-xl font-body-medium max-w-48">Become a partner</h1>
 
@@ -43,7 +42,7 @@ import PartnershipReactForm from "./Icons/PartnershipReactForm";
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const partnershipModal = document.getElementById("partnershipModal");
-    const closeButton = document.getElementById("closeModal");
+    const closeButton = document.getElementById("closeModalPartnership");
     const watchDemoButtons = document.querySelectorAll(
       "[data-join-partnership]"
     );
@@ -53,26 +52,34 @@ import PartnershipReactForm from "./Icons/PartnershipReactForm";
       watchDemoButtons.forEach((button) => {
         button.addEventListener("click", (e) => {
           e.preventDefault();
+          partnershipModal.classList.remove("hidden");
           partnershipModal.style.display = "flex";
         });
       });
 
       // Close modal with button
       closeButton.addEventListener("click", () => {
-        partnershipModal.style.display = "none";
+        console.log("failed");
+        partnershipModal.classList.add("hidden");
+        partnershipModal.style.display = "";
       });
 
       // Close modal when clicking outside
       partnershipModal.addEventListener("click", (e) => {
         if (e.target === partnershipModal) {
-          partnershipModal.style.display = "none";
+          partnershipModal.classList.add("hidden");
+          partnershipModal.style.display = "";
         }
       });
 
       // Close on escape key
       document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && partnershipModal.style.display === "flex") {
-          partnershipModal.style.display = "none";
+        if (
+          e.key === "Escape" &&
+          partnershipModal.classList.contains["hidden"] === ""
+        ) {
+          partnershipModal.classList.add("hidden");
+          partnershipModal.style.display = "";
         }
       });
     }
