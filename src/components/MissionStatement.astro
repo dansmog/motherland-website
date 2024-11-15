@@ -1,0 +1,61 @@
+---
+import { Image } from "astro:assets";
+import ThemeWrapper from "./ThemeWrapper.astro";
+
+import MissionImage from "../images/mission image.jpg";
+import BuildingVector from "../images/building.png";
+import Check from "../images/check.png";
+---
+
+<section>
+  <ThemeWrapper>
+    <section
+      class="mt-5 md:mt-0 grid grid-cols-1 md:grid-cols-2 gap-7 md:gap-10"
+    >
+      <div
+        class="flex flex-col justify-center gap-1 bg-[#F1FFE7] p-5 md:p-10 rounded-lg"
+      >
+        <h6 class="text-base font-body-medium text-black text-opacity-90">
+          Mission Statement:
+        </h6>
+        <p class="text-base font-body-medium pt-2 text-black text-opacity-60">
+          To empower Africans in the diaspora with secure, accessible, and
+          transparent financing solutions for real estate investments back home,
+          bridging the gap between dreams and ownership while fostering trust
+          and peace of mind
+        </p>
+      </div>
+      <div class="flex w-full items-center gap-14 justify-center">
+        <Image src={BuildingVector} alt="developer" height={100} width={100} />
+        <Image src={Check} alt="developer" height={100} width={100} />
+        <Image
+          src="https://cdn.prod.website-files.com/6703be4ef8e49adbcfa512dc/671a21a53131c8c43907cf60_People-07.png"
+          alt="developer"
+          height={100}
+          width={100}
+        />
+      </div>
+      <div class="">
+        <Image
+          src={MissionImage}
+          alt="developer"
+          class="h-60 w-full rounded-lg object-cover"
+        />
+      </div>
+
+      <div
+        class="flex flex-col justify-center gap-1 bg-[#F9F087] p-5 md:p-10 rounded-lg"
+      >
+        <h6 class="text-base font-body-medium text-black text-opacity-90">
+          Vision Statement:
+        </h6>
+        <p class="text-base font-body-medium pt-2 text-black text-opacity-60">
+          To be the leading provider of seamless and trustworthy real estate
+          financing for Africans abroad, transforming lives by making home
+          ownership in Africa a reality for every diaspora member seeking to
+          invest in their future
+        </p>
+      </div>
+    </section>
+  </ThemeWrapper>
+</section>

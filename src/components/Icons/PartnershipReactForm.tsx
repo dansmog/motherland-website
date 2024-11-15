@@ -103,7 +103,7 @@ const PartnershipReactForm = () => {
           <h1 className="font-body-bold text-xl mt-5 text-center">
             We do more together.
           </h1>
-          <p className="text-base font-body-medium mt-4 text-center">
+          <p className="text-base font-body-medium mt-4 text-center  max-w-96 mx-auto md:pb-14">
             Thank you for indicating interest to partner with us as a/an . Our
             team will connect with you on next steps.
           </p>

@@ -6,31 +6,33 @@ import PartnershipReactForm from "./Icons/PartnershipReactForm";
   id="partnershipModal"
   class="fixed inset-0 bg-black bg-opacity-50 z-40 items-center justify-center hidden"
 >
-  <button
-    id="closeModalPartnership"
-    type="button"
-    class="px-2 absolute cursor-pointer top-2 right-2 md:right-20 lg:right-40 xl:right-80 py-2 bg-gray-200 rounded hover:bg-gray-300"
-  >
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.758 17.243L12.001 12L17.244 17.243M17.244 6.75696L12 12L6.758 6.75696"
-        stroke="black"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"></path>
-    </svg>
-  </button>
   <div
     class="bg-white relative p-5 rounded-lg h-4/5 md:h-auto w-[380px] md:w-[720px] overflow-scroll"
   >
     <div class="relative">
-      <h1 class="text-xl font-body-medium max-w-48">Become a partner</h1>
+      <div class="flex items-center justify-between">
+        <h1 class="text-xl font-body-medium max-w-48">Become a partner</h1>
+        <button
+          id="closeModalPartnership"
+          type="button"
+          class="px-2 cursor-pointer py-2 bg-gray-200 rounded hover:bg-gray-300"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6.758 17.243L12.001 12L17.244 17.243M17.244 6.75696L12 12L6.758 6.75696"
+              stroke="black"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </button>
+      </div>
 
       <div class="mt-10">
         <PartnershipReactForm client:only="react" />
