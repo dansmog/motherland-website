@@ -104,7 +104,7 @@ const WaitlistReactForm = () => {
 
   return (
     <section className="w-full h-auto">
-      {!success ? (
+      {success ? (
         <div className="flex flex-col h-auto mt-36 justify-center items-center">
           <span className="w-20 h-20 rounded-full flex justify-center items-center bg-main">
             <svg
