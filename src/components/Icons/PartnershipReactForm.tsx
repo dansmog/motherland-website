@@ -81,7 +81,7 @@ const PartnershipReactForm = () => {
     !data?.partnershipRole.length;
 
   return (
-    <section className="w-full">
+    <section className="w-full h-auto">
       {success ? (
         <div className="flex flex-col justify-center items-center">
           <span className="w-20 h-20 rounded-full flex justify-center items-center bg-main">
@@ -104,8 +104,9 @@ const PartnershipReactForm = () => {
             We do more together.
           </h1>
           <p className="text-base font-body-medium mt-4 text-center  max-w-96 mx-auto md:pb-14">
-            Thank you for indicating interest to partner with us as a/an . Our
-            team will connect with you on next steps.
+            Thank you for indicating interest to partner with us as a/an{" "}
+            {data?.partnershipRole}. Our team will connect with you on next
+            steps.
           </p>
         </div>
       ) : (

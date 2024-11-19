@@ -30,16 +30,28 @@ import ThemeWrapper from "./ThemeWrapper.astro";
               >Min. 5yrs - Max. 15yrs</span
             >
           </div>
-          <div class="flex flex-col gap-2">
-            <h6 class="font-body-regular text-base text-[#3E3E3E]">
-              Modalities
-            </h6>
-            <span class="font-body-medium text-base text-black">
-              >= 50k 10% deposit minimum</span
-            >
-            <span class="font-body-medium text-base text-black">
-              {`<50k 5% deposit minimum`}
-            </span>
+          <div class="flex flex-col gap-3">
+            <div class="flex flex-col gap-1">
+              <span class="font-body-medium text-base text-black">
+                Loan below 50k
+              </span>
+              <span
+                class="font-body-medium text-base text-[#3E3E3E] text-opacity-60"
+              >
+                At least 5% deposit required.
+              </span>
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <span class="font-body-medium text-base text-black">
+                Loan above 50k
+              </span>
+              <span
+                class="font-body-medium text-base text-[#3E3E3E] text-opacity-60"
+              >
+                At least 10% deposit required
+              </span>
+            </div>
           </div>
           <div class="">
             <h6 class="font-body-regular text-base text-[#3E3E3E]">

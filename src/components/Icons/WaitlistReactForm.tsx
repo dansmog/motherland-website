@@ -55,9 +55,18 @@ const WaitlistReactForm = () => {
   const onHandleSubmit = async () => {
     setLoading(true);
     const payload = { ...data };
+
+    const loanAvailable =
+      parseFloat(data?.budget) - parseFloat(data?.downPayment);
+
+    payload["loanAmount"] = loanAvailable;
+
+    console.log({ payload });
+
     try {
       const response = await fetch(
         "https://hooks.zapier.com/hooks/catch/4886427/2mi1ggt/",
+
         {
           method: "POST",
           body: JSON.stringify(payload),
@@ -94,8 +103,8 @@ const WaitlistReactForm = () => {
     !data?.date.length;
 
   return (
-    <section className="w-full">
-      {success ? (
+    <section className="w-full h-auto">
+      {!success ? (
         <div className="flex flex-col h-auto mt-36 justify-center items-center">
           <span className="w-20 h-20 rounded-full flex justify-center items-center bg-main">
             <svg
@@ -116,7 +125,7 @@ const WaitlistReactForm = () => {
           <h1 className="font-body-bold text-xl mt-5 text-center">
             We are thrilled to have you on board
           </h1>
-          <p className="text-base font-body-medium mt-4 text-center">
+          <p className="text-base font-body-medium mt-4 text-center  max-w-96 mx-auto md:pb-14">
             Your application is under review and our team will reach out to you
             for further details and next steps.
           </p>
