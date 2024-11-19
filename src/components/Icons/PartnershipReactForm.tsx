@@ -109,7 +109,7 @@ const PartnershipReactForm = () => {
           </p>
         </div>
       ) : (
-        <>
+        <form>
           <div className="flex flex-col md:flex-row gap-4 items-center">
             <div className="flex flex-col gap-1 w-full">
               <label className="font-body-medium text-sm text-[#666666]">
@@ -223,17 +223,22 @@ const PartnershipReactForm = () => {
               />
             </div>
           </div>
-
+          <div
+            className="cf-turnstile"
+            data-sitekey="0x4AAAAAAA0E4xNNPLsnXO2N"
+          ></div>
           <div className="w-full mt-6">
             <button
               onClick={onHandleSubmit}
               className={`${isDisabled || loading ? "bg-slate-300" : "bg-main"} w-full py-4  rounded-lg text-white font-body-bold`}
               disabled={isDisabled || isEmailError || loading}
+              type="submit"
+              value="Submit"
             >
               {loading ? "Saving information..." : "Become a partner"}
             </button>
           </div>
-        </>
+        </form>
       )}
     </section>
   );

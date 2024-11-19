@@ -19,6 +19,9 @@ const { title } = Astro.props;
       name="description"
       content="Motherland - Own a property back in Nigeria with our hassle free mortgage plans"
     />
+    <script
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback"
+      defer></script>
 
     <!-- Facebook Meta Tags -->
     <meta property="og:url" content="https:motherland.com/" />
@@ -71,9 +74,19 @@ const { title } = Astro.props;
         initializeNavigation();
       });
     </script>
-    <!-- <script
-      src="https://www.google.com/recaptcha/enterprise.js/render=6Ldzs3oqAAAAANsCmImmWWN9XgRNPyGOKag8yhAk"
-    ></script> -->
+
+    <script>
+      /**@ts-ignore */
+      window.onloadTurnstileCallback = function () {
+        /**@ts-ignore */
+        turnstile.render("#motherlandTurnstile", {
+          sitekey: "0x4AAAAAAA0E46OeFlqK20il6oIqOs01Hks",
+          callback: function (token) {
+            console.log(`Challenge Success ${token}`);
+          },
+        });
+      };
+    </script>
   </head>
   <body>
     <slot />

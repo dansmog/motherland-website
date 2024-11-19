@@ -122,7 +122,7 @@ const WaitlistReactForm = () => {
           </p>
         </div>
       ) : (
-        <>
+        <form>
           <div className="flex flex-col md:flex-row gap-4 items-center">
             <div className="flex flex-col gap-1 w-full">
               <label className="font-body-medium text-sm text-[#666666]">
@@ -257,7 +257,7 @@ const WaitlistReactForm = () => {
                 How long have you been in {data?.countryOfResidence}?
               </label>
               <input
-                type="text"
+                type="number"
                 name="durationInCountry"
                 className="w-full  border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
                 placeholder="Please enter number of years"
@@ -341,7 +341,9 @@ const WaitlistReactForm = () => {
                 What’s your current credit score?
               </label>
               <input
-                type="text"
+                type="number"
+                maxLength={900}
+                max={900}
                 name="creditScore"
                 className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
                 placeholder="e.g 715"
@@ -377,17 +379,23 @@ const WaitlistReactForm = () => {
               </div>
             </div>
           </div>
-
+          <div
+            id="motherlandTurnstile"
+            className="cf-turnstile"
+            data-sitekey="0x4AAAAAAA0E4xNNPLsnXO2N"
+          ></div>
           <div className="w-full mt-6">
             <button
               onClick={onHandleSubmit}
               className={`${isDisabled || loading ? "bg-slate-300" : "bg-main"} w-full py-4  rounded-lg text-white font-body-bold`}
               disabled={isDisabled || isEmailError || loading}
+              type="submit"
+              value="Submit"
             >
               {loading ? "Loading please wait ..." : "Kick off my application"}
             </button>
           </div>
-        </>
+        </form>
       )}
     </section>
   );
