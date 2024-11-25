@@ -50,17 +50,32 @@ const PartnershipReactForm = () => {
   const onHandleSubmit = async () => {
     setLoading(true);
     const payload = { ...data };
+    payload["type"] = "Partnership";
+    payload["parternshipType"] = data?.partnershipRole;
     try {
-      const response = await fetch(
-        "https://hooks.zapier.com/hooks/catch/4886427/21xg822/",
-        {
+      const [zapierResponse, emailResponse] = await Promise.allSettled([
+        fetch("https://hooks.zapier.com/hooks/catch/4886427/21xg822/", {
           method: "POST",
           body: JSON.stringify(payload),
-        }
-      );
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
+        }),
+        fetch("https://api.motherland.homes/api/send-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }),
+      ]);
+
+      const hasZapierError =
+        zapierResponse.status === "rejected" || !zapierResponse?.value.ok;
+      const hasEmailError =
+        emailResponse.status === "rejected" || !emailResponse?.value.ok;
+
+      if (hasZapierError || hasEmailError) {
+        throw new Error("One or more submission endpoints failed");
       }
+
       setLoading(false);
       setSuccess(true);
     } catch (error) {

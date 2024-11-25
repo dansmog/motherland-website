@@ -28,7 +28,46 @@ const WaitlistReactForm = () => {
   const [errors, setErrors] = useState({
     email: "",
     phone: "",
+    durationInCountry: "",
+    budget: "",
+    downPayment: "",
+    creditScore: "",
   });
+
+  const validateField = (name: string, value: string) => {
+    switch (name) {
+      case "email":
+        return validateEmail(value) ? "" : "Please enter a valid email";
+
+      case "creditScore":
+        const creditScoreNum = parseFloat(value);
+        return creditScoreNum > 0 && creditScoreNum <= 900
+          ? ""
+          : "Credit score must be between 0 and 900";
+
+      case "budget":
+        const budgetNum = parseFloat(value);
+        return budgetNum > 0 && budgetNum <= 200000
+          ? ""
+          : "Budget must be between 0 and 200,000";
+
+      case "downPayment":
+        const downPaymentNum = parseFloat(value);
+        const budgetValue = parseFloat(data.budget);
+        return downPaymentNum >= 0 && downPaymentNum <= budgetValue
+          ? ""
+          : "Down payment cannot exceed budget";
+
+      case "durationInCountry":
+        const durationNum = parseFloat(value);
+        return durationNum >= 0 && durationNum <= 80
+          ? ""
+          : "Duration in country must be between 0 and 80 years";
+
+      default:
+        return "";
+    }
+  };
 
   const onPhoneChange = (value) => {
     setData({
@@ -37,22 +76,65 @@ const WaitlistReactForm = () => {
     });
   };
 
-  const onHandleChange = (event) => {
-    const { name, value } = event.target;
-    setData({
+  const onCurrencyChange = (name) => (values) => {
+    const newData = {
       ...data,
-      [name]: value,
-    });
+      [name]: values.value,
+    };
+    setData(newData);
 
-    if (name === "email") {
-      setErrors({
-        ...errors,
-        email: validateEmail(value) ? "" : "Please enter a valid email",
-      });
-    }
+    // Validate the field
+    const fieldError = validateField(name, values.value);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: fieldError,
+    }));
   };
 
-  const onHandleSubmit = async () => {
+  const onHandleChange = (event) => {
+    const { name, value } = event.target;
+    const newData = {
+      ...data,
+      [name]: value,
+    };
+    setData(newData);
+
+    const fieldError = validateField(name, value);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: fieldError,
+    }));
+  };
+
+  console.log({ errors });
+
+  const onHandleSubmit = async (event) => {
+    event.preventDefault();
+    const newErrors = {};
+    Object.keys(data).forEach((key) => {
+      if (
+        [
+          "budget",
+          "downPayment",
+          "creditScore",
+          "email",
+          "durationInCountry",
+        ].includes(key)
+      ) {
+        const error = validateField(key, data[key]);
+        if (error) newErrors[key] = error;
+      }
+    });
+
+    // If there are any errors, set them and prevent submission
+    if (Object.keys(newErrors).length > 0) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        ...newErrors,
+      }));
+      return;
+    }
+
     setLoading(true);
     const payload = { ...data };
 
@@ -60,21 +142,39 @@ const WaitlistReactForm = () => {
       parseFloat(data?.budget) - parseFloat(data?.downPayment);
 
     payload["loanAmount"] = loanAvailable;
+    payload["type"] = "waitlist";
 
     console.log({ payload });
 
     try {
-      const response = await fetch(
-        "https://hooks.zapier.com/hooks/catch/4886427/2mi1ggt/",
+      const [zapierResponse, emailResponse] = await Promise.allSettled([
+        fetch(
+          "https://hooks.zapier.com/hooks/catch/4886427/2mi1ggt/",
 
-        {
+          {
+            method: "POST",
+            body: JSON.stringify(payload),
+          }
+        ),
+
+        fetch("https://api.motherland.homes/api/send-email", {
           method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify(payload),
-        }
-      );
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
+        }),
+      ]);
+
+      const hasZapierError =
+        zapierResponse.status === "rejected" || !zapierResponse?.value.ok;
+      const hasEmailError =
+        emailResponse.status === "rejected" || !emailResponse?.value.ok;
+
+      if (hasZapierError || hasEmailError) {
+        throw new Error("One or more submission endpoints failed");
       }
+
       setLoading(false);
       setSuccess(true);
     } catch (error) {
@@ -263,7 +363,7 @@ const WaitlistReactForm = () => {
             </div>
             <div className="flex flex-col gap-1 w-full">
               <label className="font-body-medium text-sm text-[#666666]">
-                How long have you been in {data?.countryOfResidence}?
+                How long (in years) have you been in {data?.countryOfResidence}?
               </label>
               <input
                 type="number"
@@ -272,6 +372,11 @@ const WaitlistReactForm = () => {
                 placeholder="Please enter number of years"
                 onChange={onHandleChange}
               />
+              {errors?.durationInCountry && (
+                <span className="text-red-500 text-sm font-body-medium">
+                  {errors?.durationInCountry}
+                </span>
+              )}
             </div>
           </div>
 
@@ -319,13 +424,16 @@ const WaitlistReactForm = () => {
               <CurrencyFormat
                 thousandSeparator={true}
                 prefix={getCurrencySymbol(data?.countryOfResidence)}
-                onValueChange={(values) => {
-                  setData({ ...data, budget: values?.value });
-                }}
+                onValueChange={onCurrencyChange("budget")}
                 name="budget"
                 className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
                 placeholder={`50,000 ${getCurrencySymbol(data?.countryOfResidence)}`}
               />
+              {errors.budget && (
+                <span className="text-red-500 text-sm font-body-medium">
+                  {errors.budget}
+                </span>
+              )}
             </div>
             <div className="flex flex-col gap-1 w-full">
               <label className="font-body-medium text-sm text-[#666666]">
@@ -334,13 +442,16 @@ const WaitlistReactForm = () => {
               <CurrencyFormat
                 thousandSeparator={true}
                 prefix={getCurrencySymbol(data?.countryOfResidence)}
-                onValueChange={(values) => {
-                  setData({ ...data, downPayment: values?.value });
-                }}
+                onValueChange={onCurrencyChange("downPayment")}
                 name="amount"
                 className="w-full border-[1px] border-[#F3F3F3] py-3 px-4 rounded-lg text-base font-body-medium"
                 placeholder={`50,000 ${getCurrencySymbol(data?.countryOfResidence)}`}
               />
+              {errors.downPayment && (
+                <span className="text-red-500 text-sm font-body-medium">
+                  {errors.downPayment}
+                </span>
+              )}
             </div>
           </div>
 
@@ -358,6 +469,11 @@ const WaitlistReactForm = () => {
                 placeholder="e.g 715"
                 onChange={onHandleChange}
               />
+              {errors.creditScore && (
+                <span className="text-red-500 text-sm font-body-medium">
+                  {errors.creditScore}
+                </span>
+              )}
             </div>
             <div className="flex flex-col gap-1 w-full">
               <label className="font-body-medium text-sm text-[#666666]">
