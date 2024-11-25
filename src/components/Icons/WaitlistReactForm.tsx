@@ -109,8 +109,6 @@ const WaitlistReactForm = () => {
     }));
   };
 
-  console.log({ errors });
-
   const onHandleSubmit = async (event) => {
     event.preventDefault();
 
@@ -154,24 +152,24 @@ const WaitlistReactForm = () => {
     payload["type"] = "waitlist";
 
     try {
-      const verificationResponse = await fetch(
-        "https://api.motherland.homes/api/verify-turnstile",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ token }),
-        }
-      );
+      // const verificationResponse = await fetch(
+      //   "https://api.motherland.homes/api/verify-turnstile",
+      //   {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify({ token }),
+      //   }
+      // );
 
-      const verificationResult = await verificationResponse.json();
+      // const verificationResult = await verificationResponse.json();
 
-      console.log({ verificationResult });
+      // console.log({ verificationResult });
 
-      if (!verificationResult.success) {
-        throw new Error("Bot verification failed");
-      }
+      // if (!verificationResult.success) {
+      //   throw new Error("Bot verification failed");
+      // }
 
       const [zapierResponse, emailResponse] = await Promise.allSettled([
         fetch(
