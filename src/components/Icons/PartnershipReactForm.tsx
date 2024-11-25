@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 export const validateEmail = (email) => {
   // Regular expression for validating an email
@@ -9,6 +10,7 @@ export const validateEmail = (email) => {
 };
 
 const PartnershipReactForm = () => {
+  const [token, setToken] = useState<string | null>(null);
   const [data, setData] = useState({
     businessName: "",
     businessAddress: "",
@@ -47,12 +49,37 @@ const PartnershipReactForm = () => {
     });
   };
 
-  const onHandleSubmit = async () => {
+  const onHandleSubmit = async (event) => {
+    event.preventDefault();
+    if (!token) {
+      window.alert("Please complete the bot verification");
+      return;
+    }
+
     setLoading(true);
     const payload = { ...data };
     payload["type"] = "Partnership";
     payload["parternshipType"] = data?.partnershipRole;
     try {
+      const verificationResponse = await fetch(
+        "https://api.motherland.homes/api/verify-turnstile",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ token }),
+        }
+      );
+
+      const verificationResult = await verificationResponse.json();
+
+      console.log({ verificationResult });
+
+      if (!verificationResult.success) {
+        throw new Error("Bot verification failed");
+      }
+
       const [zapierResponse, emailResponse] = await Promise.allSettled([
         fetch("https://hooks.zapier.com/hooks/catch/4886427/21xg822/", {
           method: "POST",
@@ -239,10 +266,13 @@ const PartnershipReactForm = () => {
               />
             </div>
           </div>
-          <div
-            className="cf-turnstile"
-            data-sitekey="0x4AAAAAAA0E4xNNPLsnXO2N"
-          ></div>
+          <Turnstile
+            siteKey="0x4AAAAAAA0E4xNNPLsnXO2N" // Your site key
+            onSuccess={(token) => setToken(token)}
+            options={{
+              theme: "light",
+            }}
+          />
           <div className="w-full mt-6">
             <button
               onClick={onHandleSubmit}

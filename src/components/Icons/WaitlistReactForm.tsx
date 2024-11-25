@@ -6,7 +6,10 @@ import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { getCurrencySymbol } from "../../scripts/utils";
 
+import { Turnstile } from "@marsidev/react-turnstile";
+
 const WaitlistReactForm = () => {
+  const [token, setToken] = useState<string | null>(null);
   const [data, setData] = useState({
     location: "Lagos",
     downPayment: "",
@@ -110,6 +113,12 @@ const WaitlistReactForm = () => {
 
   const onHandleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!token) {
+      window.alert("Please complete the bot verification");
+      return;
+    }
+
     const newErrors = {};
     Object.keys(data).forEach((key) => {
       if (
@@ -136,7 +145,7 @@ const WaitlistReactForm = () => {
     }
 
     setLoading(true);
-    const payload = { ...data };
+    const payload = { ...data, turnstileToken: token };
 
     const loanAvailable =
       parseFloat(data?.budget) - parseFloat(data?.downPayment);
@@ -144,9 +153,26 @@ const WaitlistReactForm = () => {
     payload["loanAmount"] = loanAvailable;
     payload["type"] = "waitlist";
 
-    console.log({ payload });
-
     try {
+      const verificationResponse = await fetch(
+        "https://api.motherland.homes/api/verify-turnstile",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ token }),
+        }
+      );
+
+      const verificationResult = await verificationResponse.json();
+
+      console.log({ verificationResult });
+
+      if (!verificationResult.success) {
+        throw new Error("Bot verification failed");
+      }
+
       const [zapierResponse, emailResponse] = await Promise.allSettled([
         fetch(
           "https://hooks.zapier.com/hooks/catch/4886427/2mi1ggt/",
@@ -504,11 +530,14 @@ const WaitlistReactForm = () => {
               </div>
             </div>
           </div>
-          <div
-            id="motherlandTurnstile"
-            className="cf-turnstile"
-            data-sitekey="0x4AAAAAAA0E4xNNPLsnXO2N"
-          ></div>
+
+          <Turnstile
+            siteKey="0x4AAAAAAA0E4xNNPLsnXO2N" // Your site key
+            onSuccess={(token) => setToken(token)}
+            options={{
+              theme: "light",
+            }}
+          />
           <div className="w-full mt-6">
             <button
               onClick={onHandleSubmit}
